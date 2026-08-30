@@ -1,0 +1,7 @@
+sample,specification,term,estimate_pp,std_error,p_value,interpretation
+2023-24,ride_controls,win,0.846640,0.312498,0.006743,Winning games are associated with a higher post-game tip rate in this season
+2023-24,ride_controls,loss_surprise,-1.670121,0.442148,0.000159,The season-specific sign does not support the expected loss-aversion pattern
+2023-24,full_controls,unexpected_moderate_win,1.014808,0.261277,0.000103,An upset win remains positive after the full control set in 2023-24
+pooled,ride_controls,win,0.281490,0.339007,0.406349,The broad win effect is not significant across all three seasons
+pooled,ride_controls,loss_surprise,-0.147246,0.511027,0.773241,The continuous loss-surprise effect is not significant across all three seasons
+pooled,full_controls,unexpected_moderate_win,0.122569,0.301501,0.684354,The upset-win estimate is not stable under pooled full controls

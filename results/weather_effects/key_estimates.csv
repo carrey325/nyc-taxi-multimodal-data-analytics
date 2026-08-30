@@ -1,0 +1,8 @@
+outcome,term,effect,unit,p_value,interpretation
+tip_rate,incremental_weather_r2,0.0002,R-squared increase,,Weather adds very little explanatory power beyond trip time vendor and location controls
+tip_rate,precipitation_x_extreme_temperature,-0.000592,tip-rate fraction,0.40,The central interaction from the comparison study is not replicated
+tip_probability,precipitation_x_extreme_temperature,1.0211,odds ratio,0.56,The interaction is also null for whether a card tip is recorded
+tip_amount,precipitation_x_extreme_temperature,-0.0119,US dollars,0.43,The interaction is null for tip amount
+tip_rate,wind_speed,-0.014,percentage points per km/h,<0.001,The most stable weather coefficient is statistically clear but economically small
+tip_rate,extreme_temperature_manhattan,0.26,percentage points,<0.05,Extreme temperature is positive in the Manhattan subsample
+tip_rate,late_night_rain,0.725,percentage points,<0.05,Rain is positive in the 00:00-05:00 subsample

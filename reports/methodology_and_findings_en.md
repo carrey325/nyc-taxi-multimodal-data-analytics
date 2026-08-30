@@ -1,203 +1,207 @@
 # NYC Taxi Multimodal Data Analytics: Methodology and Findings
 
-## 1. Research objective
-The final research package separates the research problem into two layers:
-1. Build a spatial typology with `KMeans k=6 + airport special` without using tiprate in clustering.
-2. Construct residualized tiprate for `pickup` and `dropoff` separately after controlling for month and trip composition, then fit shallow regression trees for rule-based segmentation.
+## 1. Project objective
 
-The typology answers “what kinds of urban zones exist,” while the trees answer “what threshold rules still explain tiprate differences after controls.”
+This course project studies NYC taxi tipping through four parallel lenses:
 
-## 2. Execution order
-1. `build_source_manifest.py`
-2. `build_typology_0426.py`
-3. `build_residualized_tiprate.py`
-4. `build_tiprate_trees.py`
-5. `generate_0426_reports.py`
+1. taxi-record baseline relationships;
+2. urban spatial context;
+3. Knicks home-game events; and
+4. weather context.
 
-## 3. External data dependencies
-The release package does not copy data. It reads the existing analysis data from `dataset/`, `data script/parquet/`, and `data script/spatial/`. The tracked source manifest is:
+Each lens uses taxi tipping as the common outcome but asks a different question. The project therefore combines trip-level prediction, spatial classification, event-study logic, and weather interactions without treating any one module as a causal explanation for the others.
 
-| source_id | source_family | file_name | row_count | purpose |
-| --- | --- | --- | --- | --- |
-| zone_features_acs | ACS | zone_features_acs.parquet | 260 | Zone-level ACS-derived contextual features. |
-| commonplace_raw | CommonPlace | CommonPlace_20260426.csv | 20523 | Raw point-level civic-place inventory. |
-| taxi_zone_to_cdta | Crosswalk | taxi_zone_to_cdta.parquet | 739 | Taxi Zone to CDTA area-weighted crosswalk. |
-| taxi_zone_to_nta | Crosswalk | taxi_zone_to_nta.parquet | 1383 | Taxi Zone to NTA area-weighted crosswalk. |
-| taxi_zone_to_tract | Crosswalk | taxi_zone_to_tract.parquet | 5174 | Taxi Zone to tract area-weighted crosswalk. |
-| zone_features_grouped | Feature table | zone_features_grouped.parquet | 260 | Grouped static zone feature stack. |
-| taxi_zone_geometry | Geometry | taxi_zone_geometry.geoparquet | 260 | Strict Taxi Zone polygon geometry. |
-| zone_features_mta | MTA | zone_features_mta.parquet | 260 | Zone-level MTA accessibility features. |
-| zone_features_pluto | PLUTO | zone_features_pluto.parquet | 260 | Zone-level PLUTO built-environment features. |
-| dropoff_zone_month_panel | Taxi panel | dropoff_zone_month_panel_cc_enriched.parquet | 9360 | Dropoff zone-month credit-card outcome panel. |
-| pickup_zone_month_panel | Taxi panel | pickup_zone_month_panel_cc_enriched.parquet | 9360 | Pickup zone-month credit-card outcome panel. |
-| dropoff_longrun_summary | Taxi summary | dropoff_zone_longrun_summary_cc.parquet | 260 | Dropoff long-run zone summary. |
-| pickup_longrun_summary | Taxi summary | pickup_zone_longrun_summary_cc.parquet | 260 | Pickup long-run zone summary. |
+## 2. Analytical framework
 
-## 4. Typology methodology
-### 4.1 Frozen feature set
-The typology uses the following 12 features:
-- `acs_mean_travel_time_min`
-- `acs_median_household_income`
-- `acs_poverty_rate`
-- `acs_rent_burden_30plus_share`
-- `commonplace_count_per_sqmi`
-- `mta_nearest_cbd_complex_dist_ft`
-- `mta_station_density_sqmi`
-- `pluto_landuse_share_04_mixed_residential_commercial`
-- `pluto_landuse_share_06_industrial_manufacturing`
-- `pluto_landuse_share_09_open_space_recreation`
-- `pluto_office_area_share_of_bldg`
-- `pluto_units_res_per_acre`
+| Lens | Unit of analysis | Outcome | Core comparison |
+| --- | --- | --- | --- |
+| Taxi-record baseline | Individual Yellow Taxi trip | Tip rate and whether a tip is recorded | Incremental predictive contribution of fare, trip, vendor, time, and route variables |
+| Urban spatial context | Taxi Zone and zone-month panel | Raw and residualized average tip rate | Zone typology and threshold heterogeneity after month and trip-composition controls |
+| Knicks game events | MSG-area trip around a home game | Tip percentage | Pre/post timing, win/loss outcome, and result surprise relative to market expectations |
+| Weather context | Trip joined to hourly weather | Tip rate, tip probability, and tip amount | Incremental weather block after trip, vendor, time, and location controls |
 
-### 4.2 Special-zone handling
-- Airport zones with `LocationID in {1, 132, 138}` are excluded from the main clustering and grouped into `Airport special zone`.
-- The non-airport clustering universe is expected to contain 257 zones.
+The modules use different samples and estimands. Comparisons across modules are interpretive rather than direct coefficient comparisons.
 
-### 4.3 Clustering rule
-- The 12 features are winsorized at `1%/99%` and standardized with `z-score` for non-airport zones.
-- Diagnostics are still computed for `k=4..8` and both `KMeans` / `Agglomerative`, but the official typology is fixed at `KMeans(n_clusters=6, random_state=42, n_init=50)`.
+## 3. Lens I: Taxi-record baseline
 
-### 4.4 Typology results
-| cluster_id | cluster_name | zone_count | representative_zones | defining_features | pickup_mean_raw_tip_rate | dropoff_mean_raw_tip_rate | combined_mean_tip_rate | tiprate_rank |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| 1 | Recreation / open-space zone | 16 | Jamaica Bay; Astoria Park; Fresh Meadows | pluto_landuse_share_09_open_space_recreation, pluto_units_res_per_acre, pluto_landuse_share_04_mixed_residential_commercial, mta_station_density_sqmi, mta_nearest_cbd_complex_dist_ft | 0.1195468856678815 | 0.1513147540127005 | 0.135430819840291 | 5 |
-| 2 | Dense mixed-use neighborhood | 50 | Roosevelt Island; Boerum Hill; Williamsburg (South Side) | pluto_units_res_per_acre, acs_mean_travel_time_min, pluto_landuse_share_04_mixed_residential_commercial, mta_nearest_cbd_complex_dist_ft, acs_rent_burden_30plus_share | 0.2229635273082005 | 0.2359997678195249 | 0.2294816475638627 | 2 |
-| 3 | Housing-pressure residential zone | 51 | Highbridge; West Concourse; Longwood | acs_poverty_rate, acs_median_household_income, acs_rent_burden_30plus_share, acs_mean_travel_time_min, pluto_office_area_share_of_bldg | 0.0362044572060607 | 0.102902402102025 | 0.0695534296540429 | 7 |
-| 4 | CBD-accessible business core | 18 | Union Sq; Midtown South; Penn Station/Madison Sq West | mta_station_density_sqmi, pluto_office_area_share_of_bldg, acs_mean_travel_time_min, pluto_landuse_share_04_mixed_residential_commercial, acs_median_household_income | 0.2441773337772089 | 0.2446329163927812 | 0.2444051250849951 | 1 |
-| 5 | Outer-borough residential zone | 107 | Kew Gardens Hills; Sheepshead Bay; Richmond Hill | mta_nearest_cbd_complex_dist_ft, commonplace_count_per_sqmi, pluto_landuse_share_04_mixed_residential_commercial, acs_mean_travel_time_min, pluto_units_res_per_acre | 0.0533738295140572 | 0.1373682260694652 | 0.0953710277917612 | 6 |
-| 6 | Industrial / logistics zone | 15 | Sunset Park West; Sunnyside; Long Island City/Queens Plaza | pluto_landuse_share_06_industrial_manufacturing, mta_nearest_cbd_complex_dist_ft, pluto_units_res_per_acre, commonplace_count_per_sqmi, acs_rent_burden_30plus_share | 0.1297872725785465 | 0.1856476335322932 | 0.1577174530554199 | 4 |
-| 7 | Airport special zone | 3 | Newark Airport; JFK Airport; LaGuardia Airport | rule-based airport special handling | 0.1833951397038673 | 0.2085061492884769 | 0.1959506444961721 | 3 |
+### 3.1 Question and data
 
-### 4.5 Clustering QA
-| algorithm | k | silhouette_score | davies_bouldin_score | min_cluster_size | max_cluster_share | average_cluster_profile_contrast | chosen_for_0426_typology |
-| --- | --- | --- | --- | --- | --- | --- | --- |
-| Agglomerative | 4 | 0.2700358493737088 | 1.2394284152809891 | 17 | 0.4591439688715953 | 1.1287891843070903 | False |
-| Agglomerative | 5 | 0.2894360671823157 | 1.1518420547787642 | 14 | 0.4046692607003891 | 1.280701096926753 | False |
-| Agglomerative | 6 | 0.2875711278801667 | 1.1489432619136164 | 14 | 0.4046692607003891 | 1.4843180415639816 | False |
-| Agglomerative | 7 | 0.2730135063507071 | 1.1911620991994576 | 14 | 0.4046692607003891 | 1.442625050013108 | False |
-| Agglomerative | 8 | 0.264241105992201 | 1.2437651168617538 | 14 | 0.4046692607003891 | 1.472261741265099 | False |
-| KMeans | 4 | 0.2671715605627409 | 1.3584538108280246 | 18 | 0.4708171206225681 | 1.3592046654411978 | False |
-| KMeans | 5 | 0.2856656537172629 | 1.173117462313802 | 15 | 0.4669260700389105 | 1.4379357529244652 | False |
-| KMeans | 6 | 0.3078981972832068 | 1.0950039897335662 | 15 | 0.4163424124513619 | 1.5043813706384477 | True |
-| KMeans | 7 | 0.2917129018151482 | 1.245571461543856 | 15 | 0.4046692607003891 | 1.493194743788912 | False |
-| KMeans | 8 | 0.2546217124628623 | 1.1707112173499894 | 14 | 0.3463035019455253 | 1.4037522503194666 | False |
+The baseline asks how much tipping variation can be described using TLC trip records alone. The saved benchmark output covers January 2024 and starts from 2,824,462 trips. After economic and payment filters, the main positive-tip card sample contains 2,188,575 trips before fixed modeling subsamples are selected.
 
-## 5. Residualized tiprate methodology
-### 5.1 Modeling rule
-- Unified WLS formula: `avg_tip_rate ~ C(year_month) + C(Borough) + C(service_zone) + tract_coverage_share + is_partial_coverage_zone + is_water_park_special_proxy + is_source_missing_special_area + avg_trip_distance + avg_fare_per_mile + avg_passenger_count + share_airport_fee + share_airport_ratecode + share_negotiated_fare + share_special_ratecode + share_peak_hour_pickup + share_night_trip + share_weekend_trip + share_commute_hour_trip`
-- Outcome: `avg_tip_rate`
-- Weight: `valid_tip_rate_trip_count`
-- `pickup` and `dropoff` are modeled separately.
-- Monthly residuals are aggregated back to zone level using `valid_tip_rate_trip_count` as the weight.
+The primary outcome is:
 
-### 5.2 Residual model summary
-| target_side | formula | panel_rows_total | panel_rows_model_ready | panel_rows_dropped | zones_total | zones_model_ready | zones_without_model_ready_rows | r_squared | adj_r_squared | nobs |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| pickup | avg_tip_rate ~ C(year_month) + C(Borough) + C(service_zone) + tract_coverage_share + is_partial_coverage_zone + is_water_park_special_proxy + is_source_missing_special_area + avg_trip_distance + avg_fare_per_mile + avg_passenger_count + share_airport_fee + share_airport_ratecode + share_negotiated_fare + share_special_ratecode + share_peak_hour_pickup + share_night_trip + share_weekend_trip + share_commute_hour_trip | 9360 | 8644 | 716 | 260 | 259 | 1 | 0.9661345826039642 | 0.965913729759644 | 8644.0 |
-| dropoff | avg_tip_rate ~ C(year_month) + C(Borough) + C(service_zone) + tract_coverage_share + is_partial_coverage_zone + is_water_park_special_proxy + is_source_missing_special_area + avg_trip_distance + avg_fare_per_mile + avg_passenger_count + share_airport_fee + share_airport_ratecode + share_negotiated_fare + share_special_ratecode + share_peak_hour_pickup + share_night_trip + share_weekend_trip + share_commute_hour_trip | 9360 | 8989 | 371 | 260 | 259 | 1 | 0.9425742337344571 | 0.9422141975823222 | 8989.0 |
+`tip_rate_fare = tip_amount / fare_amount`
 
-## 6. Tree segmentation methodology
-- Trees are trained on non-airport zones only.
-- Targets are `pickup_residualized_tip_rate` and `dropoff_residualized_tip_rate` separately.
-- Predictors remain the same 12 zone-level features.
-- Tree inputs are winsorized but not z-scored so that thresholds remain interpretable.
-- Hyperparameter grid: `max_depth in {2,3,4}` and `min_samples_leaf in {10,15,20,25}`.
-- Only trees with `5-7` terminal leaves are eligible, and the final choice is based on `5-fold CV R²`.
+The baseline distinguishes the conditional positive-tip rate from the broader `tip_or_not` outcome because cash tips and card tips are recorded differently.
 
-### 6.1 Pickup tree selection
-| max_depth | min_samples_leaf | leaf_count | cv_r2_mean | cv_r2_std | train_r2 | chosen |
-| --- | --- | --- | --- | --- | --- | --- |
-| 3 | 20 | 5 | -0.0117707319865933 | 0.2363465591354648 | 0.2324301107542773 | True |
-| 4 | 20 | 6 | -0.0342814148603919 | 0.2359369167148829 | 0.2487066624015387 | False |
-| 3 | 15 | 5 | -0.0352568489662527 | 0.2566114362431863 | 0.2378282841346239 | False |
-| 4 | 25 | 5 | -0.0653352683562584 | 0.2715649864563016 | 0.2251977095918641 | False |
-| 4 | 15 | 6 | -0.0771526412537105 | 0.2606656908652742 | 0.2624887508890331 | False |
-| 3 | 10 | 7 | -0.0873961512388272 | 0.3108060127721387 | 0.2992474443602858 | False |
+### 3.2 Method
 
-### 6.2 Dropoff tree selection
-| max_depth | min_samples_leaf | leaf_count | cv_r2_mean | cv_r2_std | train_r2 | chosen |
-| --- | --- | --- | --- | --- | --- | --- |
-| 4 | 25 | 5 | -0.0683681253762641 | 0.1572598974320904 | 0.1382401482011549 | True |
-| 4 | 20 | 5 | -0.1056235691938681 | 0.1778778832435738 | 0.1396043910915594 | False |
-| 4 | 10 | 7 | -0.1323901215318162 | 0.09918183462655 | 0.2397065870848297 | False |
-| 3 | 10 | 5 | -0.1560898797962445 | 0.0987123431283833 | 0.1876283202328033 | False |
-| 4 | 15 | 6 | -0.2481830814145222 | 0.1445519723355427 | 0.2204272609292247 | False |
+Nested OLS specifications add four predictor blocks in order:
 
-## 7. Main findings
-### 7.1 Typology-layer findings
-At the typology level, the highest raw tiprate clusters remain `CBD-accessible business core` and `Dense mixed-use neighborhood`, while the lowest clusters are mainly `Housing-pressure residential zone` and `Outer-borough residential zone`.
+1. fare and trip characteristics;
+2. vendor indicators;
+3. hour, weekday, month, weekend, rush-hour, late-night, and holiday indicators; and
+4. pickup zone, dropoff zone, and common route controls.
 
-| cluster_id | cluster_name | zone_count | pickup_mean_raw_tiprate | pickup_mean_residualized_tiprate | dropoff_mean_raw_tiprate | dropoff_mean_residualized_tiprate |
-| --- | --- | --- | --- | --- | --- | --- |
-| 1 | Recreation / open-space zone | 16 | 0.11954688566788153 | 0.016755044436897782 | 0.1513147540127005 | 0.017365417279616414 |
-| 2 | Dense mixed-use neighborhood | 50 | 0.22296352730820054 | -0.0005070600144209279 | 0.23599976781952492 | -0.0008903031751265194 |
-| 3 | Housing-pressure residential zone | 51 | 0.03620445720606073 | -0.0010095038626372545 | 0.10290240210202503 | -0.004786386357316596 |
-| 4 | CBD-accessible business core | 18 | 0.24417733377720893 | -0.0032896867424235 | 0.24463291639278129 | -0.0015439577729319026 |
-| 5 | Outer-borough residential zone | 107 | 0.0533738295140572 | 0.0035362881710135586 | 0.13736822606946517 | 0.0019350987002196196 |
-| 6 | Industrial / logistics zone | 15 | 0.12978727257854647 | -0.007705166380539905 | 0.18564763353229322 | -0.002250851946290587 |
-| 7 | Airport special zone | 3 | 0.18339513970386737 | 2.386138264131785e-05 | 0.20850614928847686 | -3.648765173511039e-05 |
+The linear analysis uses robust standard errors. A LightGBM model provides a nonlinear benchmark, and grouped permutation importance summarizes which predictor blocks carry the most held-out information.
 
-### 7.2 Tree-layer findings
-The trees do not redefine spatial types. Instead, they split zones within and across typology classes using threshold rules that explain residualized tiprate differences after controls.
-If one cluster maps into multiple leaves, that indicates residual heterogeneity inside the same spatial type.
-It is also important that once month fixed effects, borough/service-zone structure, coverage, and trip composition are controlled, the shallow-tree 5-fold CV R² drops materially.
-That means the remaining spatial signal in residualized tiprate is much weaker than in raw long-run tiprate, so the final trees should be read as rule-based heterogeneity probes rather than high-accuracy predictors.
+### 3.3 Findings
 
-#### Pickup cluster × leaf
-| cluster_id | cluster_name | tree_leaf_id | zone_count | zones_with_target | mean_residualized_tip_rate | mean_raw_longrun_tip_rate | representative_zones |
-| --- | --- | --- | --- | --- | --- | --- | --- |
-| 1 | Recreation / open-space zone | 1 | 6 | 6 | -0.0012353857775923 | 0.152296049263179 | Astoria Park; Battery Park; Crotona Park |
-| 1 | Recreation / open-space zone | 2 | 2 | 2 | 0.0193325302248694 | 0.1065426303154349 | Highbridge Park; Inwood Hill Park |
-| 1 | Recreation / open-space zone | 3 | 1 | 1 | 0.0058498435092819 | 0.0834179250296447 | Bronx Park |
-| 1 | Recreation / open-space zone | 4 | 1 | 1 | 0.0120500800568573 | 0.0906430635412059 | Freshkills Park |
-| 1 | Recreation / open-space zone | 5 | 6 | 5 | 0.0404345994406285 | 0.0984561480474856 | Jamaica Bay; Breezy Point/Fort Tilden/Riis Beach; Fresh Meadows |
-| 2 | Dense mixed-use neighborhood | 1 | 50 | 50 | -0.0005070600144209 | 0.2229635273082005 | Alphabet City; Battery Park City; Bloomingdale |
-| 3 | Housing-pressure residential zone | 1 | 31 | 31 | -0.0062261637818999 | 0.0468143571078641 | Bedford; Belmont; Borough Park |
-| 3 | Housing-pressure residential zone | 2 | 10 | 10 | 0.0023234924431295 | 0.0265558792710489 | Brownsville; East New York; East New York/Pennsylvania Avenue |
-| 3 | Housing-pressure residential zone | 3 | 8 | 8 | 0.0129927213413021 | 0.0072557989916554 | Bedford Park; Brighton Beach; Bronxdale |
-| 3 | Housing-pressure residential zone | 4 | 1 | 1 | 0.0111968007700198 | 0.0027110796259442 | Williamsbridge/Olinville |
-| 3 | Housing-pressure residential zone | 5 | 1 | 1 | 0.0031528843126668 | 0.0688659828956332 | Pelham Bay Park |
-| 4 | CBD-accessible business core | 1 | 18 | 18 | -0.0032896867424235 | 0.2441773337772089 | Downtown Brooklyn/MetroTech; Financial District North; Financial District South |
-| 5 | Outer-borough residential zone | 1 | 39 | 39 | -0.0082233885244815 | 0.0806996382008978 | Arrochar/Fort Wadsworth; Astoria; Bay Ridge |
-| 5 | Outer-borough residential zone | 2 | 13 | 13 | 0.0008753765427732 | 0.0187132553577654 | Bath Beach; Bensonhurst East; Canarsie |
-| 5 | Outer-borough residential zone | 3 | 19 | 19 | 0.0030313441008412 | 0.0399061728488406 | Allerton/Pelham Gardens; Auburndale; Briarwood/Jamaica Hills |
-| 5 | Outer-borough residential zone | 4 | 20 | 20 | 0.0123040175976639 | 0.0394980762505515 | Baisley Park; Bayside; Bloomfield/Emerson Hill |
-| 5 | Outer-borough residential zone | 5 | 16 | 16 | 0.0240024501142446 | 0.0482664212111967 | Arden Heights; Bay Terrace/Fort Totten; Bellerose |
-| 6 | Industrial / logistics zone | 1 | 15 | 15 | -0.0077051663805399 | 0.1297872725785464 | East Williamsburg; Gowanus; Greenpoint |
+| Model | Test R-squared | Test RMSE | Test MAE |
+| --- | ---: | ---: | ---: |
+| Full OLS | 0.1500 | 0.0927 | 0.0606 |
+| LightGBM | 0.2132 | 0.0828 | 0.0589 |
 
-#### Dropoff cluster × leaf
-| cluster_id | cluster_name | tree_leaf_id | zone_count | zones_with_target | mean_residualized_tip_rate | mean_raw_longrun_tip_rate | representative_zones |
-| --- | --- | --- | --- | --- | --- | --- | --- |
-| 1 | Recreation / open-space zone | 1 | 1 | 1 | -0.0193369650668054 | 0.0954783518172735 | Crotona Park |
-| 1 | Recreation / open-space zone | 2 | 11 | 11 | -0.0003225982399811 | 0.1734705629646119 | Astoria Park; Battery Park; Bronx Park |
-| 1 | Recreation / open-space zone | 5 | 4 | 4 | 0.075183055545115 | 0.1043453799438008 | Jamaica Bay; Breezy Point/Fort Tilden/Riis Beach; Freshkills Park |
-| 2 | Dense mixed-use neighborhood | 2 | 5 | 5 | -0.0080240295034519 | 0.2227548589726301 | Alphabet City; DUMBO/Vinegar Hill; Fort Greene |
-| 2 | Dense mixed-use neighborhood | 3 | 35 | 35 | -0.0013439149826244 | 0.2435896246540549 | Battery Park City; Bloomingdale; Boerum Hill |
-| 2 | Dense mixed-use neighborhood | 4 | 10 | 10 | 0.004264201315279 | 0.2160577233221171 | Carroll Gardens; Cobble Hill; Columbia Street |
-| 3 | Housing-pressure residential zone | 1 | 25 | 25 | -0.0109110113344045 | 0.1027413650957039 | Bedford; Belmont; Borough Park |
-| 3 | Housing-pressure residential zone | 2 | 2 | 2 | -0.0034681894413526 | 0.0536522682266624 | East New York; Soundview/Castle Hill |
-| 3 | Housing-pressure residential zone | 3 | 4 | 4 | -0.0072767958775913 | 0.1612678936910196 | Central Harlem North; Hamilton Heights; Ocean Hill |
-| 3 | Housing-pressure residential zone | 4 | 19 | 19 | 0.0030605855462728 | 0.0975456117110641 | Bedford Park; Brighton Beach; Bronxdale |
-| 3 | Housing-pressure residential zone | 5 | 1 | 1 | 0.0065620161508552 | 0.0737456460830553 | Pelham Bay Park |
-| 4 | CBD-accessible business core | 2 | 1 | 1 | -0.0032392677378215 | 0.1932723298148834 | Downtown Brooklyn/MetroTech |
-| 4 | CBD-accessible business core | 3 | 16 | 16 | -0.002368817019334 | 0.2463774702074471 | Financial District North; Financial District South; Garment District |
-| 4 | CBD-accessible business core | 4 | 1 | 1 | 0.0133491001343913 | 0.2680806419360244 | Flatiron |
-| 5 | Outer-borough residential zone | 2 | 10 | 10 | -0.0089344502592739 | 0.1300732297913495 | Canarsie; Cypress Hills; Dyker Heights |
-| 5 | Outer-borough residential zone | 4 | 70 | 69 | 0.0012085195856238 | 0.1440761809543273 | Allerton/Pelham Gardens; Arrochar/Fort Wadsworth; Astoria |
-| 5 | Outer-borough residential zone | 5 | 27 | 27 | 0.0078176708669621 | 0.1229275251704157 | Arden Heights; Baisley Park; Bellerose |
-| 6 | Industrial / logistics zone | 1 | 2 | 2 | -0.013478210806506 | 0.1092771416037511 | Hunts Point; Mott Haven/Port Morris |
-| 6 | Industrial / logistics zone | 2 | 2 | 2 | -0.0333418403106376 | 0.1580416224986929 | Queensbridge/Ravenswood; Saint Michaels Cemetery/Woodside |
-| 6 | Industrial / logistics zone | 4 | 11 | 11 | 0.0054433930036298 | 0.2045524522526827 | East Williamsburg; Gowanus; Greenpoint |
+Fare and trip characteristics account for about 91.3% of positive grouped permutation loss, followed by location at 4.3%, time at 2.5%, and vendor at 1.9%. The nonlinear model performs better than OLS, indicating interactions and nonlinearities, but most individual-level variation remains unexplained.
 
-## 8. Interpretation boundaries
-- The typology is descriptive, not causal.
-- Residualized tiprate controls for time and trip composition, but it is still not a causal treatment effect.
-- The trees are intended for threshold-based interpretation rather than black-box prediction.
-- Zones such as `Great Kills Park` may lack enough model-ready panel observations for a residual target, but can still be assigned to a tree leaf using static features.
+The baseline also shows why payment handling matters: almost all recorded positive tips occur among card-paid trips. The broader extensive-margin model therefore partly reflects the recording system rather than only latent willingness to tip.
 
-## 9. Key figures
-![Typology map](../outputs/figures/typology_map.png)
+![Baseline feature importance](../results/figures/baseline_feature_importance.png)
 
-![Pickup tree](../outputs/figures/pickup_tree.png)
+### 3.4 Boundaries
 
-![Dropoff tree](../outputs/figures/dropoff_tree.png)
+The baseline describes prediction and association. Vendor indicators may proxy for terminal, fleet, route, or customer differences, while raw location IDs do not identify neighborhood mechanisms.
+
+## 4. Lens II: Urban spatial context
+
+### 4.1 Question and data integration
+
+The spatial module asks what types of urban environments characterize NYC Taxi Zones and whether static urban features explain residual tipping differences after conventional controls.
+
+The 260-zone feature stack integrates:
+
+- ACS socioeconomic measures;
+- MapPLUTO land-use and building characteristics;
+- MTA accessibility;
+- CommonPlace civic-place inventory; and
+- TLC pickup and dropoff zone-month panels for January 2023-December 2025.
+
+### 4.2 Zone typology
+
+The official typology uses 12 frozen features. Features are winsorized at the 1st and 99th percentiles and standardized across 257 non-airport zones. KMeans with `k=6`, `random_state=42`, and `n_init=50` defines the main clusters. Newark, JFK, and LaGuardia form a rule-based airport class.
+
+| Class | Zones | Combined raw tip rate | Interpretation |
+| --- | ---: | ---: | --- |
+| CBD-accessible business core | 18 | 0.2444 | Highest raw tip-rate environment |
+| Dense mixed-use neighborhood | 50 | 0.2295 | High-density residential and commercial mix |
+| Airport special zone | 3 | 0.1960 | Distinct airport pricing and trip structure |
+| Industrial / logistics zone | 15 | 0.1577 | Production and logistics land use |
+| Recreation / open-space zone | 16 | 0.1354 | Parks and low-density special areas |
+| Outer-borough residential zone | 107 | 0.0954 | Large and internally diverse residential class |
+| Housing-pressure residential zone | 51 | 0.0696 | Highest poverty and rent-pressure profile |
+
+KMeans `k=6` has the best tested silhouette score (`0.308`) and Davies-Bouldin score (`1.095`) among the candidate configurations.
+
+![NYC Taxi Zone typology](../results/figures/typology_map.png)
+
+### 4.3 Residual models and trees
+
+Pickup and dropoff weighted least-squares models control for month, borough, service zone, spatial coverage, trip distance, fare per mile, passenger count, airport and rate-code composition, peak-hour share, night share, weekend share, and commute-hour share.
+
+| Side | Model-ready rows | R-squared | Adjusted R-squared |
+| --- | ---: | ---: | ---: |
+| Pickup | 8,644 | 0.9661 | 0.9659 |
+| Dropoff | 8,989 | 0.9426 | 0.9422 |
+
+Monthly residuals are aggregated to zone-level targets and modeled with shallow trees using the same 12 static urban features. The selected pickup tree has five leaves and mean five-fold cross-validation R-squared of `-0.0118`; the selected dropoff tree also has five leaves and mean cross-validation R-squared of `-0.0684`.
+
+The high residual-model R-squared and weak tree cross-validation tell a consistent story: month, geography, coverage, and trip composition absorb most systematic variation. The remaining static-feature rules are useful for exploratory segmentation, not accurate prediction.
+
+### 4.4 Boundaries
+
+The clusters are descriptive types, and the tree thresholds are exploratory. Neither identifies a neighborhood treatment effect. Some special or low-volume zones also have limited model-ready outcome coverage.
+
+## 5. Lens III: Knicks home-game events
+
+### 5.1 Question and event design
+
+The event module tests whether sports-related mood and reference-point surprise are associated with tips on card-paid taxi trips originating near Madison Square Garden. It covers 144 Knicks home games across 2022-23, 2023-24, and 2024-25 and uses pickup zones 164 and 186.
+
+Trips are tagged into windows around game start and game end. A previous-day, same-time window provides a control comparison. Market-implied win probability is derived from the point spread, and surprise is defined as realized win status minus expected win probability.
+
+The model sequence includes:
+
+1. pre/post and difference-in-differences comparisons;
+2. win and continuous surprise terms;
+3. predicted-outcome by realized-outcome interactions; and
+4. a default-tip choice model.
+
+### 5.2 Findings
+
+| Sample and specification | Term | Estimate | p-value |
+| --- | --- | ---: | ---: |
+| 2023-24, ride controls | Win | +0.847 percentage points | 0.0067 |
+| 2023-24, ride controls | Loss surprise | -1.670 | 0.0002 |
+| 2023-24, full controls | Unexpected moderate win | +1.015 percentage points | 0.0001 |
+| Pooled, ride controls | Win | +0.281 percentage points | 0.4063 |
+| Pooled, ride controls | Loss surprise | -0.147 | 0.7732 |
+| Pooled, full controls | Unexpected moderate win | +0.123 percentage points | 0.6844 |
+
+The 2023-24 season produces the clearest positive estimates. However, neither the broad win term nor the continuous loss-surprise term remains significant in the three-season pooled sample. The 2023-24 upset-win association also disappears under pooled full controls.
+
+The defensible conclusion is therefore season-specific: game outcomes may be associated with short-lived tipping changes near MSG, but the effect is not stable enough to support a general claim that Knicks wins raise tips.
+
+![Knicks 2023-24 tip-rate trajectory](../results/figures/knicks_2023_24_trajectory.png)
+
+### 5.3 Boundaries
+
+Game start times are approximated at 19:30 and game duration at 2.5 hours, which creates timing error for matinees and unusual broadcasts. Some missing moneylines are synthesized from model-implied win probability. These approximations, limited geographic coverage, and cross-season instability constrain interpretation.
+
+## 6. Lens IV: Weather context
+
+### 6.1 Question and sample
+
+The weather module asks whether hourly conditions add information after conventional taxi controls. The broader data workflow integrates 132 TLC monthly files with hourly NYC weather and filters the source warehouse from approximately 780 million rows to 89.6 million card-paid trips. Estimation uses fixed training, validation, and test subsamples rather than loading the full warehouse into each statistical model.
+
+Weather fields include temperature, apparent temperature, precipitation, snowfall, snow depth, wind speed, humidity, cloud cover, rain and snow indicators, and an extreme-temperature indicator.
+
+### 6.2 Method
+
+Nested OLS specifications proceed from fare and trip variables to vendor, time, location, weather main effects, and weather interactions. The comparison interaction is:
+
+`precipitation × extreme temperature`
+
+Additional Logit and tip-amount models check whether conclusions depend on the outcome definition. Subsample models test time-of-day, borough, airport, and severity heterogeneity.
+
+### 6.3 Findings
+
+| Result | Estimate | Interpretation |
+| --- | ---: | --- |
+| Incremental R-squared from weather | 0.0002 | Almost no additional explanatory power |
+| Precipitation × extreme temperature, tip rate | -0.000592, `p=0.40` | Not significant |
+| Same interaction, tip probability | OR 1.0211, `p=0.56` | Not significant |
+| Same interaction, tip amount | -$0.0119, `p=0.43` | Not significant |
+| Wind speed | -0.014 percentage points per km/h, `p<0.001` | Stable but economically small |
+| Extreme temperature, Manhattan | +0.26 percentage points, `p<0.05` | Localized subgroup association |
+| Rain, 00:00-05:00 | +0.725 percentage points, `p<0.05` | Localized late-night association |
+
+The central precipitation-by-extreme-temperature result from the comparison study is not replicated across three outcome definitions. Wind speed is the most stable weather coefficient, but its magnitude is small. Manhattan extreme-temperature and late-night rain estimates suggest heterogeneity, not a broad weather effect.
+
+![Weather findings summary](../results/figures/weather_results_summary.png)
+
+### 6.4 Boundaries
+
+The analysis covers Yellow Taxi and is shaped by card-tip recording. Severe weather is rare, the highest-severity sample is small, and driver fixed effects are unavailable. Weather may affect trip selection or taxi demand before it affects observed tipping, so these coefficients should not be interpreted as isolated causal effects.
+
+## 7. Cross-module synthesis
+
+The four lenses point to a common hierarchy without collapsing them into one model:
+
+- Trip economics and trip structure provide the largest predictive signal at the individual level.
+- Urban context strongly organizes raw geographic differences, but conventional controls absorb most zone-month variation.
+- Knicks events can coincide with localized, season-specific changes, but the estimates are specification-sensitive.
+- Weather contributes the least incremental explanatory power overall, despite a few meaningful subgroup patterns.
+
+Together, the results show why NYC tipping is best understood as a layered behavioral outcome. Stable trip and spatial structure coexist with weaker, short-lived event and environmental effects.
+
+## 8. Release contents
+
+The public repository contains final scripts, compact result tables, and selected figures. It excludes raw TLC records, weather warehouses, trip-level MSG samples, notebooks, logs, cached bytecode, machine-specific paths, and draft documents.
+
+Key result files:
+
+- `results/baseline/key_metrics.csv`
+- `results/typology/typology_cluster_summary.csv`
+- `results/residual_trees/residual_model_summary.csv`
+- `results/knicks_event_study/key_estimates.csv`
+- `results/weather_effects/key_estimates.csv`

@@ -1,0 +1,7 @@
+metric,split,value,interpretation
+ols_r2,test,0.149976,Trip fare time vendor and location controls explain about 15 percent of held-out tip-rate variation
+lightgbm_r2,test,0.213210,The nonlinear benchmark improves on OLS but leaves most individual variation unexplained
+fare_trip_permutation_share,validation,0.913008,Fare and trip characteristics dominate grouped predictive importance
+location_permutation_share,validation,0.042967,Taxi-zone and route variables provide the second-largest grouped contribution
+time_permutation_share,validation,0.025077,Time variables add a smaller predictive contribution
+vendor_permutation_share,validation,0.018948,Vendor indicators add the smallest grouped contribution
