@@ -23,8 +23,8 @@ This repository studies how NYC taxi tipping patterns relate to trip composition
 ## Repository contents
 
 ```text
-scripts/                  Reproducible analysis pipeline
-reports/                  English and Chinese methodology/findings reports
+scripts/                  Final analysis scripts
+reports/                  Methodology and findings report
 results/figures/          Final maps and tree diagrams
 results/typology/         Cluster summaries, diagnostics, and zone labels
 results/residual_trees/   Residual-model, tree, and zone-level result tables
@@ -34,57 +34,11 @@ The original raw data, processed parquet warehouse, temporary files, logs, explo
 
 ## Key outputs
 
-- [English methodology and findings](reports/methodology_and_findings_en.md)
-- [中文方法与结果报告](reports/methodology_and_findings_zh.md)
+- [Methodology and findings](reports/methodology_and_findings_en.md)
 - [Taxi Zone typology summary](results/typology/typology_cluster_summary.csv)
 - [Zone-level typology and tree bridge](results/residual_trees/zone_typology_tree_bridge.csv)
 - [Pickup tree rules](results/residual_trees/pickup_tree_rules.md)
 - [Dropoff tree rules](results/residual_trees/dropoff_tree_rules.md)
-
-## Reproducing the analysis
-
-Python 3.13 was used for the final run.
-
-```bash
-python -m venv .venv
-```
-
-On Windows PowerShell:
-
-```powershell
-.\.venv\Scripts\Activate.ps1
-pip install -r requirements.txt
-$env:NYC_TAXI_DATA_ROOT = "D:\path\to\full\research\workspace"
-python scripts\build_source_manifest.py
-python scripts\build_typology_0426.py
-python scripts\build_residualized_tiprate.py
-python scripts\build_tiprate_trees.py
-python scripts\generate_0426_reports.py
-```
-
-`NYC_TAXI_DATA_ROOT` should contain the following upstream structure:
-
-```text
-dataset/
-  CommonPlace_20260426.csv
-data script/
-  parquet/
-    zone_features_grouped.parquet
-    zone_features_acs.parquet
-    zone_features_pluto.parquet
-    zone_features_mta.parquet
-    pickup_zone_month_panel_cc_enriched.parquet
-    dropoff_zone_month_panel_cc_enriched.parquet
-    pickup_zone_longrun_summary_cc.parquet
-    dropoff_zone_longrun_summary_cc.parquet
-    taxi_zone_to_tract.parquet
-    taxi_zone_to_nta.parquet
-    taxi_zone_to_cdta.parquet
-  spatial/
-    taxi_zone_geometry.geoparquet
-```
-
-The data are not committed because the complete taxi store and spatial sources are large and may have separate distribution terms.
 
 ## Study scope
 
@@ -93,4 +47,3 @@ The data are not committed because the complete taxi store and spatial sources a
 - Main payment sample: credit-card trips
 - Panel size: 9,360 pickup rows and 9,360 dropoff rows
 - Typology: KMeans `k=6` plus three airport special zones
-
