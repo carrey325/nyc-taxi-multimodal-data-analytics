@@ -1,0 +1,30 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Local configuration and editor files
+.env
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Large source/processed datasets are not distributed with this repository
+data/
+*.parquet
+*.geoparquet
+*.duckdb
+*.sqlite
+
+# Reproducible intermediate outputs containing local paths or detailed rows
+results/source_manifest.csv
+results/typology/commonplace_*
+results/typology/typology_feature_matrix.*
+results/typology/typology_standardized_means.csv
+results/typology/typology_winsor_bounds.csv
+results/residual_trees/*_tree_leaf_assignments.csv
+results/residual_trees/*_zone_residualized_tiprate.csv
+results/residual_trees/*_tree_feature_bounds.csv
+

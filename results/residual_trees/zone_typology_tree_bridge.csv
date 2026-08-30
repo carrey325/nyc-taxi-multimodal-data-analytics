@@ -1,0 +1,261 @@
+LocationID,Zone,Borough,service_zone,is_airport_zone,cluster_status,cluster_id,cluster_name,typology_version,pickup_raw_longrun_tip_rate,pickup_residualized_tip_rate,pickup_tree_leaf_id,dropoff_raw_longrun_tip_rate,dropoff_residualized_tip_rate,dropoff_tree_leaf_id
+1,Newark Airport,EWR,EWR,True,airport_special,7,Airport special zone,0426_kmeans6_airport_special,0.1189358501969674,-4.5046445878140084e-14,,0.1887024997648413,-1.631208944206699e-15,
+2,Jamaica Bay,Queens,Boro Zone,False,clustered,1,Recreation / open-space zone,0426_kmeans6_airport_special,0.1983254780984274,0.1201270464139069,5,0.1817892994352274,0.0316222236173364,5
+3,Allerton/Pelham Gardens,Bronx,Boro Zone,False,clustered,5,Outer-borough residential zone,0426_kmeans6_airport_special,0.0066177153365692,0.0120487725319833,3,0.0863995311333497,0.0111298584710426,4
+4,Alphabet City,Manhattan,Yellow Zone,False,clustered,2,Dense mixed-use neighborhood,0426_kmeans6_airport_special,0.2213372873663632,0.0023680910500534,1,0.2341771437177598,-0.0090651915566729,2
+5,Arden Heights,Staten Island,Boro Zone,False,clustered,5,Outer-borough residential zone,0426_kmeans6_airport_special,0.0106583673645299,0.0321835726927701,5,0.07514284051847,0.0202945373221122,5
+6,Arrochar/Fort Wadsworth,Staten Island,Boro Zone,False,clustered,5,Outer-borough residential zone,0426_kmeans6_airport_special,0.1594532048501163,-0.0222603875030714,1,0.1981070764496494,0.0009223480865979,4
+7,Astoria,Queens,Boro Zone,False,clustered,5,Outer-borough residential zone,0426_kmeans6_airport_special,0.154826278302192,-0.0333939707370335,1,0.2164814977794258,0.0019777696790525,4
+8,Astoria Park,Queens,Boro Zone,False,clustered,1,Recreation / open-space zone,0426_kmeans6_airport_special,0.1800513328876503,-0.0029667849178158,1,0.2059862681491503,0.011456190230627,2
+9,Auburndale,Queens,Boro Zone,False,clustered,5,Outer-borough residential zone,0426_kmeans6_airport_special,0.0394637639512764,0.0008362374210974,3,0.1615381997060765,0.0090895602905352,4
+10,Baisley Park,Queens,Boro Zone,False,clustered,5,Outer-borough residential zone,0426_kmeans6_airport_special,0.1361303626560706,0.026972448010305,4,0.1883127664840032,0.0064627735104196,5
+11,Bath Beach,Brooklyn,Boro Zone,False,clustered,5,Outer-borough residential zone,0426_kmeans6_airport_special,0.0156948152339051,0.0208171646830654,2,0.1044992531668662,0.011803553978159,4
+12,Battery Park,Manhattan,Yellow Zone,False,clustered,1,Recreation / open-space zone,0426_kmeans6_airport_special,0.2203698888185112,-0.0161327462107207,1,0.2202505422748866,-0.013392193743005,2
+13,Battery Park City,Manhattan,Yellow Zone,False,clustered,2,Dense mixed-use neighborhood,0426_kmeans6_airport_special,0.2340555839361707,-0.0043562651315342,1,0.225682102679461,-0.0112449219010632,3
+14,Bay Ridge,Brooklyn,Boro Zone,False,clustered,5,Outer-borough residential zone,0426_kmeans6_airport_special,0.0206087717240022,0.0182797379753091,1,0.1597490950021441,0.022726482594819,4
+15,Bay Terrace/Fort Totten,Queens,Boro Zone,False,clustered,5,Outer-borough residential zone,0426_kmeans6_airport_special,0.0245657912350458,0.0119797818552305,5,0.1673682212449744,0.0080591467376624,4
+16,Bayside,Queens,Boro Zone,False,clustered,5,Outer-borough residential zone,0426_kmeans6_airport_special,0.0225286335517521,0.0060399428561872,4,0.1603780371899239,0.0137035377708347,4
+17,Bedford,Brooklyn,Boro Zone,False,clustered,3,Housing-pressure residential zone,0426_kmeans6_airport_special,0.032832529811196,-0.0120396452319437,1,0.1654774119209913,-0.0139962198980241,1
+18,Bedford Park,Bronx,Boro Zone,False,clustered,3,Housing-pressure residential zone,0426_kmeans6_airport_special,0.0048858305959015,0.012799801258623,3,0.0660279983198082,0.00575127313411,4
+19,Bellerose,Queens,Boro Zone,False,clustered,5,Outer-borough residential zone,0426_kmeans6_airport_special,0.0346891256420874,0.0238284432029369,5,0.1253142507896376,0.0027916794077653,5
+20,Belmont,Bronx,Boro Zone,False,clustered,3,Housing-pressure residential zone,0426_kmeans6_airport_special,0.0111171227694314,-0.0001877516451416,1,0.1221718286516518,0.003341644739576,1
+21,Bensonhurst East,Brooklyn,Boro Zone,False,clustered,5,Outer-borough residential zone,0426_kmeans6_airport_special,0.006668078236112,0.0061635767608458,2,0.0853997216917831,0.0019804746826674,4
+22,Bensonhurst West,Brooklyn,Boro Zone,False,clustered,5,Outer-borough residential zone,0426_kmeans6_airport_special,0.0076433643444424,0.0059759483895923,1,0.0980780784522145,0.0012191201794888,4
+23,Bloomfield/Emerson Hill,Staten Island,Boro Zone,False,clustered,5,Outer-borough residential zone,0426_kmeans6_airport_special,0.0275493867772669,0.0180038732418458,4,0.1083479404850837,-0.0054027704667499,4
+24,Bloomingdale,Manhattan,Yellow Zone,False,clustered,2,Dense mixed-use neighborhood,0426_kmeans6_airport_special,0.240280139619345,-0.0140062205219483,1,0.2475584985417773,-0.0061878681603036,3
+25,Boerum Hill,Brooklyn,Boro Zone,False,clustered,2,Dense mixed-use neighborhood,0426_kmeans6_airport_special,0.1443583483651395,-0.003805292624401,1,0.1972051434980176,0.0019741386474825,3
+26,Borough Park,Brooklyn,Boro Zone,False,clustered,3,Housing-pressure residential zone,0426_kmeans6_airport_special,0.0076066098174663,-0.0075153528987153,1,0.0774925569327984,-0.0175623278336889,1
+27,Breezy Point/Fort Tilden/Riis Beach,Queens,Boro Zone,False,clustered,1,Recreation / open-space zone,0426_kmeans6_airport_special,0.0632373773235488,0.0237915779526647,5,0.1796774189915684,0.0445780253458817,5
+28,Briarwood/Jamaica Hills,Queens,Boro Zone,False,clustered,5,Outer-borough residential zone,0426_kmeans6_airport_special,0.0934958990869129,0.0033637785142122,3,0.1448122237844352,-0.0172785729437925,4
+29,Brighton Beach,Brooklyn,Boro Zone,False,clustered,3,Housing-pressure residential zone,0426_kmeans6_airport_special,0.0066467603318931,0.0276419661323353,3,0.0797274357531626,0.0189951532619514,4
+30,Broad Channel,Queens,Boro Zone,False,clustered,5,Outer-borough residential zone,0426_kmeans6_airport_special,0.0871641972500893,0.0468127914812753,5,0.1765284589856194,0.0132295725949687,5
+31,Bronx Park,Bronx,Boro Zone,False,clustered,1,Recreation / open-space zone,0426_kmeans6_airport_special,0.0834179250296447,0.0058498435092819,3,0.1630348191142326,-0.0065196802436844,2
+32,Bronxdale,Bronx,Boro Zone,False,clustered,3,Housing-pressure residential zone,0426_kmeans6_airport_special,0.0042991113356889,0.0111236199068185,3,0.0623255505913503,-0.0004151329438351,4
+33,Brooklyn Heights,Brooklyn,Boro Zone,False,clustered,2,Dense mixed-use neighborhood,0426_kmeans6_airport_special,0.1743480292029718,0.0047955532491018,1,0.2163474648574348,0.0033065470900447,3
+34,Brooklyn Navy Yard,Brooklyn,Boro Zone,False,clustered,2,Dense mixed-use neighborhood,0426_kmeans6_airport_special,0.1683280572134269,-0.0003384851964439,1,0.1930263563394554,-0.0204693372021025,3
+35,Brownsville,Brooklyn,Boro Zone,False,clustered,3,Housing-pressure residential zone,0426_kmeans6_airport_special,0.0014778210542072,-0.0019411235831196,2,0.0312042580223402,-0.0129447163418241,1
+36,Bushwick North,Brooklyn,Boro Zone,False,clustered,3,Housing-pressure residential zone,0426_kmeans6_airport_special,0.0912124120323224,0.0026186972344497,1,0.1896838355221856,-0.0008939806118285,4
+37,Bushwick South,Brooklyn,Boro Zone,False,clustered,3,Housing-pressure residential zone,0426_kmeans6_airport_special,0.0457110511567096,-0.0044981158504962,1,0.1746069402876756,-0.0029836269761087,4
+38,Cambria Heights,Queens,Boro Zone,False,clustered,5,Outer-borough residential zone,0426_kmeans6_airport_special,0.0142012160791419,0.0191348012991247,5,0.0974760116689008,-0.0363625980130643,5
+39,Canarsie,Brooklyn,Boro Zone,False,clustered,5,Outer-borough residential zone,0426_kmeans6_airport_special,0.0041546952431404,0.0067394630839824,2,0.0553624794000676,-0.0092951529649028,2
+40,Carroll Gardens,Brooklyn,Boro Zone,False,clustered,2,Dense mixed-use neighborhood,0426_kmeans6_airport_special,0.1900285277486542,-0.0015002431915417,1,0.2239262592966716,0.0138953410655555,4
+41,Central Harlem,Manhattan,Boro Zone,False,clustered,2,Dense mixed-use neighborhood,0426_kmeans6_airport_special,0.1836459513063032,-0.013323299460283,1,0.2113802686682491,-0.004613279785637,3
+42,Central Harlem North,Manhattan,Boro Zone,False,clustered,3,Housing-pressure residential zone,0426_kmeans6_airport_special,0.0802226450102872,-0.0162966535520362,1,0.1760521956186113,-0.0121801338389795,3
+43,Central Park,Manhattan,Yellow Zone,False,clustered,2,Dense mixed-use neighborhood,0426_kmeans6_airport_special,0.2562021259467967,-0.0011756804933447,1,0.2606967533356126,-0.0014591585460418,3
+44,Charleston/Tottenville,Staten Island,Boro Zone,False,clustered,5,Outer-borough residential zone,0426_kmeans6_airport_special,0.0105510576937648,-0.0334589903656766,4,0.111157099526004,0.0229081380327031,5
+45,Chinatown,Manhattan,Yellow Zone,False,clustered,2,Dense mixed-use neighborhood,0426_kmeans6_airport_special,0.2257375325000793,-0.0091532846174222,1,0.2274123902453194,-0.010390677188007,3
+46,City Island,Bronx,Boro Zone,False,clustered,5,Outer-borough residential zone,0426_kmeans6_airport_special,0.0132440418318957,0.0253515328478948,4,0.1394992549980711,0.0399309126751454,5
+47,Claremont/Bathgate,Bronx,Boro Zone,False,clustered,3,Housing-pressure residential zone,0426_kmeans6_airport_special,0.0053043651699265,-0.0046662008329546,1,0.0460668213568942,-0.0086058487172847,1
+48,Clinton East,Manhattan,Yellow Zone,False,clustered,2,Dense mixed-use neighborhood,0426_kmeans6_airport_special,0.261091454369285,0.0061226390096568,1,0.2540664972018069,0.0025343314924407,3
+49,Clinton Hill,Brooklyn,Boro Zone,False,clustered,2,Dense mixed-use neighborhood,0426_kmeans6_airport_special,0.0551530352395692,-0.0026250831214869,1,0.193543638254016,-8.44250182569694e-05,3
+50,Clinton West,Manhattan,Yellow Zone,False,clustered,2,Dense mixed-use neighborhood,0426_kmeans6_airport_special,0.2500187596814164,-0.0003433675504267,1,0.2458343060801559,-0.0064270016801496,3
+51,Co-Op City,Bronx,Boro Zone,False,clustered,5,Outer-borough residential zone,0426_kmeans6_airport_special,0.0019611665048898,0.0106226102158106,5,0.0410379370959157,0.0099898746607107,5
+52,Cobble Hill,Brooklyn,Boro Zone,False,clustered,2,Dense mixed-use neighborhood,0426_kmeans6_airport_special,0.2052589204938867,0.0165316546555383,1,0.220717161362148,0.0067691800391858,4
+53,College Point,Queens,Boro Zone,False,clustered,5,Outer-borough residential zone,0426_kmeans6_airport_special,0.0786106409882795,0.0006579495222694,1,0.1726813306145506,0.0043660657803267,4
+54,Columbia Street,Brooklyn,Boro Zone,False,clustered,2,Dense mixed-use neighborhood,0426_kmeans6_airport_special,0.1682880368706679,0.0082269287120133,1,0.222181903856321,0.0125572014471363,4
+55,Coney Island,Brooklyn,Boro Zone,False,clustered,3,Housing-pressure residential zone,0426_kmeans6_airport_special,0.0052180509871479,0.0319706663784865,3,0.0501568268614106,0.0240653074023929,4
+56,Corona,Queens,Boro Zone,False,clustered,5,Outer-borough residential zone,0426_kmeans6_airport_special,0.0606298798881128,-0.0104365176412211,2,0.119469993835674,-0.0116962329041335,4
+58,Country Club,Bronx,Boro Zone,False,clustered,5,Outer-borough residential zone,0426_kmeans6_airport_special,0.0207474439269996,0.0155347757347753,3,0.1667328665722163,0.0181310377989459,4
+59,Crotona Park,Bronx,Boro Zone,False,clustered,1,Recreation / open-space zone,0426_kmeans6_airport_special,0.0411118067867293,0.0003869310532362,1,0.0954783518172735,-0.0193369650668054,1
+60,Crotona Park East,Bronx,Boro Zone,False,clustered,3,Housing-pressure residential zone,0426_kmeans6_airport_special,0.0040985527806413,0.0040517833266308,1,0.0538190865204859,-0.0023290835663542,1
+61,Crown Heights North,Brooklyn,Boro Zone,False,clustered,3,Housing-pressure residential zone,0426_kmeans6_airport_special,0.0165826554032695,-0.0085261669460877,1,0.1508695430906229,-0.0058360104920798,4
+62,Crown Heights South,Brooklyn,Boro Zone,False,clustered,3,Housing-pressure residential zone,0426_kmeans6_airport_special,0.0122318271054381,-0.01247023160017,1,0.1318790084850101,-0.0165030007747124,4
+63,Cypress Hills,Brooklyn,Boro Zone,False,clustered,5,Outer-borough residential zone,0426_kmeans6_airport_special,0.0165654703344394,0.0044195451654985,2,0.0886908942044275,-0.0221618409004005,2
+64,Douglaston,Queens,Boro Zone,False,clustered,5,Outer-borough residential zone,0426_kmeans6_airport_special,0.0553031326178836,0.0098118944066861,5,0.1766638533580374,0.0180339799200997,5
+65,Downtown Brooklyn/MetroTech,Brooklyn,Boro Zone,False,clustered,4,CBD-accessible business core,0426_kmeans6_airport_special,0.1841310815875454,0.0015804596059253,1,0.1932723298148834,-0.0032392677378215,2
+66,DUMBO/Vinegar Hill,Brooklyn,Boro Zone,False,clustered,2,Dense mixed-use neighborhood,0426_kmeans6_airport_special,0.1940655562807057,-0.0103460413011194,1,0.2120452933819903,-0.0170800018066262,2
+67,Dyker Heights,Brooklyn,Boro Zone,False,clustered,5,Outer-borough residential zone,0426_kmeans6_airport_special,0.0219015376175521,-0.009867209121334,1,0.141006507841215,-0.0001574626417779,2
+68,East Chelsea,Manhattan,Yellow Zone,False,clustered,2,Dense mixed-use neighborhood,0426_kmeans6_airport_special,0.2515931294839563,-0.003989532103429,1,0.2605497860485851,0.0035869095658526,3
+69,East Concourse/Concourse Village,Bronx,Boro Zone,False,clustered,3,Housing-pressure residential zone,0426_kmeans6_airport_special,0.0084825344906199,-0.010024476487951,1,0.0984664902291901,-0.0120480175290473,1
+70,East Elmhurst,Queens,Boro Zone,False,clustered,5,Outer-borough residential zone,0426_kmeans6_airport_special,0.2355536632478714,0.0012757077145343,1,0.2459020815991978,0.0472635427846404,4
+71,East Flatbush/Farragut,Brooklyn,Boro Zone,False,clustered,5,Outer-borough residential zone,0426_kmeans6_airport_special,0.0029501523830328,-0.0082996903377885,2,0.0609508758037852,-0.0123319436601363,2
+72,East Flatbush/Remsen Village,Brooklyn,Boro Zone,False,clustered,5,Outer-borough residential zone,0426_kmeans6_airport_special,0.0026177078104588,-0.0088429857109533,2,0.0556326538904988,-0.0143833177974202,4
+73,East Flushing,Queens,Boro Zone,False,clustered,5,Outer-borough residential zone,0426_kmeans6_airport_special,0.0208515998299626,-0.0004342658162747,3,0.140600652216837,-0.0149319839875212,2
+74,East Harlem North,Manhattan,Boro Zone,False,clustered,3,Housing-pressure residential zone,0426_kmeans6_airport_special,0.1722933825719253,-0.0159142365683765,1,0.2117673172870631,-0.012906281361709,1
+75,East Harlem South,Manhattan,Boro Zone,False,clustered,3,Housing-pressure residential zone,0426_kmeans6_airport_special,0.2199043130224543,0.0052674383120625,1,0.2343540875258352,0.0070130912761294,1
+76,East New York,Brooklyn,Boro Zone,False,clustered,3,Housing-pressure residential zone,0426_kmeans6_airport_special,0.0054506944512574,0.0022563926677281,2,0.0434221418693496,-0.011487256721329,2
+77,East New York/Pennsylvania Avenue,Brooklyn,Boro Zone,False,clustered,3,Housing-pressure residential zone,0426_kmeans6_airport_special,0.0022180774155763,-0.0001174693358143,2,0.0451240157556057,-0.0047854072483374,4
+78,East Tremont,Bronx,Boro Zone,False,clustered,3,Housing-pressure residential zone,0426_kmeans6_airport_special,0.0046226982142046,4.2465296097117264e-05,2,0.0442596455414607,-0.0029795450156199,1
+79,East Village,Manhattan,Yellow Zone,False,clustered,2,Dense mixed-use neighborhood,0426_kmeans6_airport_special,0.2487068463168935,0.0014160678524555,1,0.2504415090917309,0.0001564496036052,3
+80,East Williamsburg,Brooklyn,Boro Zone,False,clustered,6,Industrial / logistics zone,0426_kmeans6_airport_special,0.144045472526862,0.0154678751010691,1,0.2041782142552936,0.0018055489264391,4
+81,Eastchester,Bronx,Boro Zone,False,clustered,5,Outer-borough residential zone,0426_kmeans6_airport_special,0.0027517902432767,0.0150680507495897,4,0.047980361467544,0.0072444258681408,4
+82,Elmhurst,Queens,Boro Zone,False,clustered,5,Outer-borough residential zone,0426_kmeans6_airport_special,0.093944621751227,-0.0209742395790454,1,0.1518714267198434,-0.0131397274638803,4
+83,Elmhurst/Maspeth,Queens,Boro Zone,False,clustered,5,Outer-borough residential zone,0426_kmeans6_airport_special,0.1269103162090626,-0.007248311660581,1,0.1733248564112878,-0.0077679123675221,4
+84,Eltingville/Annadale/Prince's Bay,Staten Island,Boro Zone,False,clustered,5,Outer-borough residential zone,0426_kmeans6_airport_special,0.0578913809085865,0.0655237522378301,5,0.1839119669536154,0.049715221909059,5
+85,Erasmus,Brooklyn,Boro Zone,False,clustered,5,Outer-borough residential zone,0426_kmeans6_airport_special,0.0073668926226869,-0.0095043044597303,2,0.0951686524178306,-0.0152710130199169,4
+86,Far Rockaway,Queens,Boro Zone,False,clustered,5,Outer-borough residential zone,0426_kmeans6_airport_special,0.0030181046223067,0.0487161668008505,4,0.0677840818947622,0.0489390221054698,5
+87,Financial District North,Manhattan,Yellow Zone,False,clustered,4,CBD-accessible business core,0426_kmeans6_airport_special,0.2260802600143979,-0.0044421498504389,1,0.2212088595571419,-0.0051330976431316,3
+88,Financial District South,Manhattan,Yellow Zone,False,clustered,4,CBD-accessible business core,0426_kmeans6_airport_special,0.2196317931152166,-0.0143483201316858,1,0.2145881921055585,-0.0156611738499726,3
+89,Flatbush/Ditmas Park,Brooklyn,Boro Zone,False,clustered,5,Outer-borough residential zone,0426_kmeans6_airport_special,0.0123402022405872,0.0007854428123591,1,0.1439718367825925,0.0103840585380008,4
+90,Flatiron,Manhattan,Yellow Zone,False,clustered,4,CBD-accessible business core,0426_kmeans6_airport_special,0.2630777038725315,0.0049604806339153,1,0.2680806419360244,0.0133491001343913,4
+91,Flatlands,Brooklyn,Boro Zone,False,clustered,5,Outer-borough residential zone,0426_kmeans6_airport_special,0.0028679302497789,-0.004682146533526,2,0.0592919806732352,-0.0037078751152646,4
+92,Flushing,Queens,Boro Zone,False,clustered,3,Housing-pressure residential zone,0426_kmeans6_airport_special,0.0354019604613102,-0.0104553733035259,1,0.1796461387679729,-0.0023409557130027,4
+93,Flushing Meadows-Corona Park,Queens,Boro Zone,False,clustered,1,Recreation / open-space zone,0426_kmeans6_airport_special,0.19305073517282,0.0181845140431573,1,0.1935125754693531,-0.0005264442401871,2
+94,Fordham South,Bronx,Boro Zone,False,clustered,3,Housing-pressure residential zone,0426_kmeans6_airport_special,0.0047927480843167,-0.0029614736431511,1,0.0564818064963976,-0.0108449685034882,1
+95,Forest Hills,Queens,Boro Zone,False,clustered,5,Outer-borough residential zone,0426_kmeans6_airport_special,0.0531519831511811,-0.0116663716173384,2,0.1865440885496056,-0.0060735139303116,4
+96,Forest Park/Highland Park,Queens,Boro Zone,False,clustered,1,Recreation / open-space zone,0426_kmeans6_airport_special,0.1387919287709133,0.004815877354579,1,0.1546973858733321,0.0007227936762787,2
+97,Fort Greene,Brooklyn,Boro Zone,False,clustered,2,Dense mixed-use neighborhood,0426_kmeans6_airport_special,0.1405401579206637,-0.0108630956495622,1,0.1905104500412222,-0.0018371803073374,2
+98,Fresh Meadows,Queens,Boro Zone,False,clustered,1,Recreation / open-space zone,0426_kmeans6_airport_special,0.022881389663922,-0.0009869289635977,5,0.1604615469007601,-0.0225151361048414,2
+99,Freshkills Park,Staten Island,Boro Zone,False,clustered,1,Recreation / open-space zone,0426_kmeans6_airport_special,0.0906430635412059,0.0120500800568573,4,0.0559148013484074,0.0183682752490445,5
+100,Garment District,Manhattan,Yellow Zone,False,clustered,4,CBD-accessible business core,0426_kmeans6_airport_special,0.2509933727997307,-0.0041539294824789,1,0.2490271562763812,-0.0054178455975048,3
+101,Glen Oaks,Queens,Boro Zone,False,clustered,5,Outer-borough residential zone,0426_kmeans6_airport_special,0.0268933076075618,0.0077266154223735,4,0.1361833745615473,0.006873938072354,5
+102,Glendale,Queens,Boro Zone,False,clustered,5,Outer-borough residential zone,0426_kmeans6_airport_special,0.0299766088221757,-0.0132459667451612,1,0.1549044945618283,-0.0109957608903489,4
+103,Governor's Island/Ellis Island/Liberty Island,Manhattan,Yellow Zone,False,clustered,2,Dense mixed-use neighborhood,0426_kmeans6_airport_special,0.294478885087011,0.0025804890200282,1,0.1062171453529194,3.5961571884597464e-16,4
+106,Gowanus,Brooklyn,Boro Zone,False,clustered,6,Industrial / logistics zone,0426_kmeans6_airport_special,0.085516704043937,-0.008808971947454,1,0.198678296086709,0.0093958412742483,4
+107,Gramercy,Manhattan,Yellow Zone,False,clustered,2,Dense mixed-use neighborhood,0426_kmeans6_airport_special,0.2546520166830919,-0.0019798535354774,1,0.2585955869562921,0.0036339098989784,3
+108,Gravesend,Brooklyn,Boro Zone,False,clustered,5,Outer-borough residential zone,0426_kmeans6_airport_special,0.0049508720405793,0.0189629183279716,2,0.0677794991986215,0.0162876554221617,4
+109,Great Kills,Staten Island,Boro Zone,False,clustered,5,Outer-borough residential zone,0426_kmeans6_airport_special,0.0787396155852257,-0.0139722864017398,5,0.1771745514431557,0.0189573010318039,5
+110,Great Kills Park,Staten Island,Boro Zone,False,clustered,1,Recreation / open-space zone,0426_kmeans6_airport_special,,,5,0.0,0.2061636979681976,5
+111,Green-Wood Cemetery,Brooklyn,Boro Zone,False,clustered,5,Outer-borough residential zone,0426_kmeans6_airport_special,0.14850025756545,0.0305799236573224,1,0.2036174261341773,0.0079360324033801,4
+112,Greenpoint,Brooklyn,Boro Zone,False,clustered,6,Industrial / logistics zone,0426_kmeans6_airport_special,0.1836477850666668,0.0133009068635728,1,0.2249788494518745,0.0084309951538141,4
+113,Greenwich Village North,Manhattan,Yellow Zone,False,clustered,4,CBD-accessible business core,0426_kmeans6_airport_special,0.2619770900007772,0.0033616810938993,1,0.2669071074885107,0.0066733220734465,3
+114,Greenwich Village South,Manhattan,Yellow Zone,False,clustered,2,Dense mixed-use neighborhood,0426_kmeans6_airport_special,0.2514778654427757,0.0012287223965284,1,0.2560937220665608,0.0001795247432343,3
+115,Grymes Hill/Clifton,Staten Island,Boro Zone,False,clustered,5,Outer-borough residential zone,0426_kmeans6_airport_special,0.0942651244702761,-0.0369486839315443,1,0.1626560527823703,-0.0273395102929723,4
+116,Hamilton Heights,Manhattan,Boro Zone,False,clustered,3,Housing-pressure residential zone,0426_kmeans6_airport_special,0.1481372660626536,-0.0129295768439669,1,0.1956237045323555,-0.0012142794784547,3
+117,Hammels/Arverne,Queens,Boro Zone,False,clustered,5,Outer-borough residential zone,0426_kmeans6_airport_special,0.0019658450820438,0.0387016402466253,5,0.0542100646797449,0.0377021544528048,5
+118,Heartland Village/Todt Hill,Staten Island,Boro Zone,False,clustered,5,Outer-borough residential zone,0426_kmeans6_airport_special,0.1170973408454225,-0.043590542765913,4,0.1833123420238643,-0.0038813176336731,4
+119,Highbridge,Bronx,Boro Zone,False,clustered,3,Housing-pressure residential zone,0426_kmeans6_airport_special,0.0274082317891778,-0.006940761906855,1,0.1018516121325227,-0.0119827489463527,1
+120,Highbridge Park,Manhattan,Boro Zone,False,clustered,1,Recreation / open-space zone,0426_kmeans6_airport_special,0.1319319181975642,0.0197074232606009,2,0.1610516907940613,-0.002430986753316,2
+121,Hillcrest/Pomonok,Queens,Boro Zone,False,clustered,5,Outer-borough residential zone,0426_kmeans6_airport_special,0.0265538272292624,-0.0120859572704785,3,0.1229764972760647,-0.0118446776448002,4
+122,Hollis,Queens,Boro Zone,False,clustered,5,Outer-borough residential zone,0426_kmeans6_airport_special,0.00949353300702,0.0084339244912599,4,0.091297031709616,-0.0162928946158948,5
+123,Homecrest,Brooklyn,Boro Zone,False,clustered,5,Outer-borough residential zone,0426_kmeans6_airport_special,0.0060882196622188,-0.0035349268506853,1,0.0805042181458135,-0.0038604422160082,4
+124,Howard Beach,Queens,Boro Zone,False,clustered,5,Outer-borough residential zone,0426_kmeans6_airport_special,0.0667806327123296,0.0141156124367262,3,0.1496316351710123,-0.0078054302445057,2
+125,Hudson Sq,Manhattan,Yellow Zone,False,clustered,4,CBD-accessible business core,0426_kmeans6_airport_special,0.2528826871179006,-0.0003037617573541,1,0.2519182538593994,0.0042455658204886,3
+126,Hunts Point,Bronx,Boro Zone,False,clustered,6,Industrial / logistics zone,0426_kmeans6_airport_special,0.0104183829433893,0.0008261248449744,1,0.0792304475546837,-0.0050984527915261,1
+127,Inwood,Manhattan,Boro Zone,False,clustered,5,Outer-borough residential zone,0426_kmeans6_airport_special,0.0518651348027399,0.0188214229572097,2,0.1855546187174809,0.0186657866738686,4
+128,Inwood Hill Park,Manhattan,Boro Zone,False,clustered,1,Recreation / open-space zone,0426_kmeans6_airport_special,0.0811533424333057,0.018957637189138,2,0.167556546228624,0.0321377701093703,2
+129,Jackson Heights,Queens,Boro Zone,False,clustered,5,Outer-borough residential zone,0426_kmeans6_airport_special,0.1328081258849253,-0.0053937516178371,1,0.2066250649273132,0.0096676750506993,4
+130,Jamaica,Queens,Boro Zone,False,clustered,5,Outer-borough residential zone,0426_kmeans6_airport_special,0.0758888095256175,0.0018322851177049,4,0.1150125098960101,-0.0132690796413078,4
+131,Jamaica Estates,Queens,Boro Zone,False,clustered,5,Outer-borough residential zone,0426_kmeans6_airport_special,0.0122658977160751,-0.0019378566972696,4,0.123409809778406,-0.0113571969441443,5
+132,JFK Airport,Queens,Airports,True,airport_special,7,Airport special zone,0426_kmeans6_airport_special,0.1889146360555239,-0.0002539938196018,,0.1960966099903069,-0.0005771042968424,
+133,Kensington,Brooklyn,Boro Zone,False,clustered,5,Outer-borough residential zone,0426_kmeans6_airport_special,0.0323027142646956,-0.0031975913174448,1,0.1801992256800615,0.0175891770381367,4
+134,Kew Gardens,Queens,Boro Zone,False,clustered,5,Outer-borough residential zone,0426_kmeans6_airport_special,0.1079051494202119,-0.0048185747206975,1,0.1615651662258009,-0.010341943357109,2
+135,Kew Gardens Hills,Queens,Boro Zone,False,clustered,5,Outer-borough residential zone,0426_kmeans6_airport_special,0.0209580285890767,-0.0452321392429811,1,0.1494272221651761,-0.025356130132872,4
+136,Kingsbridge Heights,Bronx,Boro Zone,False,clustered,3,Housing-pressure residential zone,0426_kmeans6_airport_special,0.0081570765660358,-0.0099423695124323,2,0.0689348131842189,-0.0047517054314605,4
+137,Kips Bay,Manhattan,Yellow Zone,False,clustered,2,Dense mixed-use neighborhood,0426_kmeans6_airport_special,0.2478608583263365,-0.0018263254833778,1,0.243271505974939,-0.0032861518138986,3
+138,LaGuardia Airport,Queens,Airports,True,airport_special,7,Airport special zone,0426_kmeans6_airport_special,0.2423349328591108,0.0003255779675708,,0.2407193381102824,0.0004676413416387,
+139,Laurelton,Queens,Boro Zone,False,clustered,5,Outer-borough residential zone,0426_kmeans6_airport_special,0.0055718487289833,0.021549806515531,5,0.1054071693201182,-0.0257309361312609,5
+140,Lenox Hill East,Manhattan,Yellow Zone,False,clustered,2,Dense mixed-use neighborhood,0426_kmeans6_airport_special,0.2533595754860647,-0.003064946446966,1,0.2500211094687228,-0.0085943268243303,3
+141,Lenox Hill West,Manhattan,Yellow Zone,False,clustered,2,Dense mixed-use neighborhood,0426_kmeans6_airport_special,0.2622968840910696,0.0007273003649639,1,0.2619847117704481,-0.0010545079983232,3
+142,Lincoln Square East,Manhattan,Yellow Zone,False,clustered,2,Dense mixed-use neighborhood,0426_kmeans6_airport_special,0.2653614901836215,0.0036782834624617,1,0.2671137299557795,0.0026552539519587,3
+143,Lincoln Square West,Manhattan,Yellow Zone,False,clustered,2,Dense mixed-use neighborhood,0426_kmeans6_airport_special,0.2583228723605583,-0.0001299460530628,1,0.2526166550688253,-0.0082419208599905,3
+144,Little Italy/NoLiTa,Manhattan,Yellow Zone,False,clustered,4,CBD-accessible business core,0426_kmeans6_airport_special,0.2435885642860018,-0.0067201930543253,1,0.2415006602898765,-0.0093530692847375,3
+145,Long Island City/Hunters Point,Queens,Boro Zone,False,clustered,6,Industrial / logistics zone,0426_kmeans6_airport_special,0.1803287230362715,0.0028901683661589,1,0.22424030695946,0.0120680825216133,4
+146,Long Island City/Queens Plaza,Queens,Boro Zone,False,clustered,6,Industrial / logistics zone,0426_kmeans6_airport_special,0.1996512344936682,-0.0215057394212627,1,0.209430379606431,0.0010157917463172,4
+147,Longwood,Bronx,Boro Zone,False,clustered,3,Housing-pressure residential zone,0426_kmeans6_airport_special,0.0102404830291078,-0.0056675634666368,1,0.080208410241561,-0.0141348369986562,1
+148,Lower East Side,Manhattan,Yellow Zone,False,clustered,2,Dense mixed-use neighborhood,0426_kmeans6_airport_special,0.2346008783144606,-0.0022943402373119,1,0.2361148169032738,-0.0052751977351621,3
+149,Madison,Brooklyn,Boro Zone,False,clustered,5,Outer-borough residential zone,0426_kmeans6_airport_special,0.005431135925257,-0.0017042071718489,1,0.0972265624437185,0.0008700591619438,4
+150,Manhattan Beach,Brooklyn,Boro Zone,False,clustered,5,Outer-borough residential zone,0426_kmeans6_airport_special,0.0177650773800746,0.0174828083492257,3,0.105457750277092,0.0215002805147315,4
+151,Manhattan Valley,Manhattan,Yellow Zone,False,clustered,2,Dense mixed-use neighborhood,0426_kmeans6_airport_special,0.2486480796220616,-0.0086070880416321,1,0.2527189716471982,-0.0054194407030449,3
+152,Manhattanville,Manhattan,Boro Zone,False,clustered,3,Housing-pressure residential zone,0426_kmeans6_airport_special,0.1745744380376739,-0.0200760040956112,1,0.1974151285319778,-0.0120779008291974,1
+153,Marble Hill,Manhattan,Boro Zone,False,clustered,3,Housing-pressure residential zone,0426_kmeans6_airport_special,0.0170995823795486,0.0143124002143212,3,0.1211066685721925,0.0103475423381341,1
+154,Marine Park/Floyd Bennett Field,Brooklyn,Boro Zone,False,clustered,1,Recreation / open-space zone,0426_kmeans6_airport_special,0.1845873341520595,0.050048464812887,5,0.1866253145541259,0.016250252374768,2
+155,Marine Park/Mill Basin,Brooklyn,Boro Zone,False,clustered,5,Outer-borough residential zone,0426_kmeans6_airport_special,0.0096576943198261,-0.0051643880187325,1,0.0960260061134119,0.0007799864162451,4
+156,Mariners Harbor,Staten Island,Boro Zone,False,clustered,5,Outer-borough residential zone,0426_kmeans6_airport_special,0.073374017096162,-0.0464867073534564,3,0.1028573801971363,-0.0159722146233627,4
+157,Maspeth,Queens,Boro Zone,False,clustered,5,Outer-borough residential zone,0426_kmeans6_airport_special,0.1940014828865539,0.0465092689952309,1,0.2115053149539104,0.0209788188370942,4
+158,Meatpacking/West Village West,Manhattan,Yellow Zone,False,clustered,2,Dense mixed-use neighborhood,0426_kmeans6_airport_special,0.2468771089954172,0.0039713582560146,1,0.2593158498968804,0.0070263492966219,4
+159,Melrose South,Bronx,Boro Zone,False,clustered,3,Housing-pressure residential zone,0426_kmeans6_airport_special,0.0117019696523972,-0.019299455277883,1,0.0859724331156536,-0.014084274892714,1
+160,Middle Village,Queens,Boro Zone,False,clustered,5,Outer-borough residential zone,0426_kmeans6_airport_special,0.0740522508236897,-0.005273647869182,1,0.1850146295296355,-0.008912613814745,2
+161,Midtown Center,Manhattan,Yellow Zone,False,clustered,4,CBD-accessible business core,0426_kmeans6_airport_special,0.256595402815721,-0.0026354401167573,1,0.256378618705172,-0.0023787073860558,3
+162,Midtown East,Manhattan,Yellow Zone,False,clustered,4,CBD-accessible business core,0426_kmeans6_airport_special,0.257002460678111,-0.0012952914770677,1,0.2600827290288079,0.0022793807473704,3
+163,Midtown North,Manhattan,Yellow Zone,False,clustered,4,CBD-accessible business core,0426_kmeans6_airport_special,0.259489396180065,0.0009330942866063,1,0.25914989212983,0.0003273456104356,3
+164,Midtown South,Manhattan,Yellow Zone,False,clustered,4,CBD-accessible business core,0426_kmeans6_airport_special,0.2553049236634787,-0.0010899351802811,1,0.2530882613263115,-0.0001317356234539,3
+165,Midwood,Brooklyn,Boro Zone,False,clustered,5,Outer-borough residential zone,0426_kmeans6_airport_special,0.0063989665585748,-0.0122431410059977,1,0.1055443706470787,-0.0040479369245066,4
+166,Morningside Heights,Manhattan,Boro Zone,False,clustered,2,Dense mixed-use neighborhood,0426_kmeans6_airport_special,0.2340854950679109,0.0125033679114054,1,0.2363148817325811,0.0058179365018877,3
+167,Morrisania/Melrose,Bronx,Boro Zone,False,clustered,3,Housing-pressure residential zone,0426_kmeans6_airport_special,0.0039963956157322,-0.0132190676642859,1,0.0575154585454794,-0.0117974920157291,1
+168,Mott Haven/Port Morris,Bronx,Boro Zone,False,clustered,6,Industrial / logistics zone,0426_kmeans6_airport_special,0.0368445015209799,-0.0182405771514714,1,0.1393238356528186,-0.021857968821486,1
+169,Mount Hope,Bronx,Boro Zone,False,clustered,3,Housing-pressure residential zone,0426_kmeans6_airport_special,0.0072903900433785,-0.0037377163573017,1,0.0591721539567195,-0.0118539920141953,1
+170,Murray Hill,Manhattan,Yellow Zone,False,clustered,2,Dense mixed-use neighborhood,0426_kmeans6_airport_special,0.2544936153756583,-0.0031595706039561,1,0.2565151094666347,-0.0010316799234548,3
+171,Murray Hill-Queens,Queens,Boro Zone,False,clustered,5,Outer-borough residential zone,0426_kmeans6_airport_special,0.0127812461803298,-0.0198176893888631,3,0.1658359861386625,-0.000127528344222,4
+172,New Dorp/Midland Beach,Staten Island,Boro Zone,False,clustered,5,Outer-borough residential zone,0426_kmeans6_airport_special,0.1877626793529234,0.05968089722512,4,0.1702456346345768,-0.0008754092357062,2
+173,North Corona,Queens,Boro Zone,False,clustered,5,Outer-borough residential zone,0426_kmeans6_airport_special,0.0482464541541063,-0.0145378126054484,1,0.1449247834876744,-0.0169843536306854,4
+174,Norwood,Bronx,Boro Zone,False,clustered,3,Housing-pressure residential zone,0426_kmeans6_airport_special,0.0057679685050059,0.0061669048065101,3,0.0592801454337722,0.0157297224991365,4
+175,Oakland Gardens,Queens,Boro Zone,False,clustered,5,Outer-borough residential zone,0426_kmeans6_airport_special,0.0169964606666025,0.0107163729956124,4,0.1466190079641088,0.0060606617312815,5
+176,Oakwood,Staten Island,Boro Zone,False,clustered,5,Outer-borough residential zone,0426_kmeans6_airport_special,0.1738554647425889,0.039817775857772,5,0.1850373126982051,0.009459070074104,5
+177,Ocean Hill,Brooklyn,Boro Zone,False,clustered,3,Housing-pressure residential zone,0426_kmeans6_airport_special,0.0066774052673333,0.0008356952082297,1,0.0882110602220185,-0.0135427684778849,3
+178,Ocean Parkway South,Brooklyn,Boro Zone,False,clustered,5,Outer-borough residential zone,0426_kmeans6_airport_special,0.0117413659671026,5.147798455854364e-05,1,0.1120114282402298,-0.0039614753910879,4
+179,Old Astoria,Queens,Boro Zone,False,clustered,5,Outer-borough residential zone,0426_kmeans6_airport_special,0.1305381418669656,-0.0294926862429935,1,0.2124580833232456,0.0029675182252727,4
+180,Ozone Park,Queens,Boro Zone,False,clustered,5,Outer-borough residential zone,0426_kmeans6_airport_special,0.061747812350299,0.0061400650553106,1,0.1376649929415965,-0.0161933747258274,4
+181,Park Slope,Brooklyn,Boro Zone,False,clustered,2,Dense mixed-use neighborhood,0426_kmeans6_airport_special,0.1282115355054307,-0.0040734274763549,1,0.2070369093790709,0.0152997000262288,4
+182,Parkchester,Bronx,Boro Zone,False,clustered,3,Housing-pressure residential zone,0426_kmeans6_airport_special,0.0026534103481968,0.0035080317655642,2,0.0595037128575933,0.0085153590053557,4
+183,Pelham Bay,Bronx,Boro Zone,False,clustered,5,Outer-borough residential zone,0426_kmeans6_airport_special,0.0083315827791544,0.0151834448795828,3,0.095124470671636,0.0098519098855098,4
+184,Pelham Bay Park,Bronx,Boro Zone,False,clustered,3,Housing-pressure residential zone,0426_kmeans6_airport_special,0.0688659828956332,0.0031528843126668,5,0.0737456460830553,0.0065620161508552,5
+185,Pelham Parkway,Bronx,Boro Zone,False,clustered,5,Outer-borough residential zone,0426_kmeans6_airport_special,0.0061361117149804,0.0042913460680477,3,0.0936799234228268,0.0208539595659652,4
+186,Penn Station/Madison Sq West,Manhattan,Yellow Zone,False,clustered,4,CBD-accessible business core,0426_kmeans6_airport_special,0.2480947273454902,-0.009303270760689,1,0.2642200916621037,4.482073102244528e-05,3
+187,Port Richmond,Staten Island,Boro Zone,False,clustered,5,Outer-borough residential zone,0426_kmeans6_airport_special,0.0799584090428839,0.0024283658127908,3,0.1294911008734228,-0.0010270194250924,4
+188,Prospect-Lefferts Gardens,Brooklyn,Boro Zone,False,clustered,5,Outer-borough residential zone,0426_kmeans6_airport_special,0.0120454732235539,-0.01093474681426,1,0.1320495399160671,-0.0002252472110067,4
+189,Prospect Heights,Brooklyn,Boro Zone,False,clustered,2,Dense mixed-use neighborhood,0426_kmeans6_airport_special,0.1227523779114376,-0.0030716205205556,1,0.2057691708537039,0.0022323765463117,4
+190,Prospect Park,Brooklyn,Boro Zone,False,clustered,1,Recreation / open-space zone,0426_kmeans6_airport_special,0.1404006031424502,-0.0117001059879901,1,0.1909206346285271,-0.0057393983867371,2
+191,Queens Village,Queens,Boro Zone,False,clustered,5,Outer-borough residential zone,0426_kmeans6_airport_special,0.0075630571750704,0.0136857463112954,4,0.0814593080065806,0.0006417448827033,5
+192,Queensboro Hill,Queens,Boro Zone,False,clustered,5,Outer-borough residential zone,0426_kmeans6_airport_special,0.037018971752786,-0.0134803647097741,1,0.1476638228861374,-0.0025307217859353,2
+193,Queensbridge/Ravenswood,Queens,Boro Zone,False,clustered,6,Industrial / logistics zone,0426_kmeans6_airport_special,0.0888435091474426,-0.128343416143836,1,0.1523786717265492,-0.0685729298082236,2
+194,Randalls Island,Manhattan,Yellow Zone,False,clustered,3,Housing-pressure residential zone,0426_kmeans6_airport_special,0.2239519110704824,0.0265182640368945,2,0.2274584508501218,-0.0201847676035108,1
+195,Red Hook,Brooklyn,Boro Zone,False,clustered,6,Industrial / logistics zone,0426_kmeans6_airport_special,0.1339683118060636,-0.0153338238717553,1,0.2000875292628932,-0.0008257085188612,4
+196,Rego Park,Queens,Boro Zone,False,clustered,5,Outer-borough residential zone,0426_kmeans6_airport_special,0.0755801908824602,-0.0080277007271013,1,0.1548807841774753,-0.0094935489161282,4
+197,Richmond Hill,Queens,Boro Zone,False,clustered,5,Outer-borough residential zone,0426_kmeans6_airport_special,0.065732792259149,0.0036833910779893,3,0.1082528131491324,-0.0002270955175663,4
+198,Ridgewood,Queens,Boro Zone,False,clustered,5,Outer-borough residential zone,0426_kmeans6_airport_special,0.0516576020372599,-0.0172308669880591,1,0.1899594571235529,0.0001469143276248,4
+199,Rikers Island,Bronx,Boro Zone,False,clustered,5,Outer-borough residential zone,0426_kmeans6_airport_special,0.2179169411043229,-0.0010201933335003,1,,,4
+200,Riverdale/North Riverdale/Fieldston,Bronx,Boro Zone,False,clustered,5,Outer-borough residential zone,0426_kmeans6_airport_special,0.0194802182162696,0.007059514371239,4,0.186816985304465,0.0173873825872024,4
+201,Rockaway Park,Queens,Boro Zone,False,clustered,5,Outer-borough residential zone,0426_kmeans6_airport_special,0.0096659568353576,0.0311260005195414,4,0.1396038430085139,0.0353483012128594,5
+202,Roosevelt Island,Manhattan,Boro Zone,False,clustered,2,Dense mixed-use neighborhood,0426_kmeans6_airport_special,0.0865552833550294,-0.0023509028070801,1,0.2109691531977819,0.0162456895860435,3
+203,Rosedale,Queens,Boro Zone,False,clustered,5,Outer-borough residential zone,0426_kmeans6_airport_special,0.019097739927668,0.0288325262666611,5,0.1089274163496812,-0.0231555367785557,5
+204,Rossville/Woodrow,Staten Island,Boro Zone,False,clustered,5,Outer-borough residential zone,0426_kmeans6_airport_special,0.0882366939413279,0.007009005119738,5,0.1567841039805655,0.0148951158978441,5
+205,Saint Albans,Queens,Boro Zone,False,clustered,5,Outer-borough residential zone,0426_kmeans6_airport_special,0.0045427887061904,0.0116500642069403,4,0.0869326364480345,-0.0193942329410431,5
+206,Saint George/New Brighton,Staten Island,Boro Zone,False,clustered,5,Outer-borough residential zone,0426_kmeans6_airport_special,0.1148201748326674,-0.0381224723164828,1,0.1678410443063998,-0.0172038169933991,4
+207,Saint Michaels Cemetery/Woodside,Queens,Boro Zone,False,clustered,6,Industrial / logistics zone,0426_kmeans6_airport_special,0.1894849956859014,0.0137879942189188,1,0.1637045732708367,0.0018892491869484,2
+208,Schuylerville/Edgewater Park,Bronx,Boro Zone,False,clustered,5,Outer-borough residential zone,0426_kmeans6_airport_special,0.0178783519035897,0.0132794224308364,3,0.1224798852543277,0.0136079674432111,4
+209,Seaport,Manhattan,Yellow Zone,False,clustered,4,CBD-accessible business core,0426_kmeans6_airport_special,0.226246249004865,-0.0121158352280826,1,0.2244686512258776,-0.0069073643809989,3
+210,Sheepshead Bay,Brooklyn,Boro Zone,False,clustered,5,Outer-borough residential zone,0426_kmeans6_airport_special,0.004030321792934,0.0171351819688896,3,0.07930912443387,0.0128445199654446,4
+211,SoHo,Manhattan,Yellow Zone,False,clustered,2,Dense mixed-use neighborhood,0426_kmeans6_airport_special,0.2467341070682569,-0.0088266536131974,1,0.2465598474468519,-0.0122038595620132,4
+212,Soundview/Bruckner,Bronx,Boro Zone,False,clustered,3,Housing-pressure residential zone,0426_kmeans6_airport_special,0.0089994188345252,0.0023624318883126,2,0.0690649697010079,-0.0094991238151388,1
+213,Soundview/Castle Hill,Bronx,Boro Zone,False,clustered,3,Housing-pressure residential zone,0426_kmeans6_airport_special,0.0102184891137711,0.0057997847655358,1,0.0638823945839753,0.0045508778386237,2
+214,South Beach/Dongan Hills,Staten Island,Boro Zone,False,clustered,5,Outer-borough residential zone,0426_kmeans6_airport_special,0.0521318863993396,0.0026372749081614,3,0.170719406484746,0.0025043068819029,4
+215,South Jamaica,Queens,Boro Zone,False,clustered,5,Outer-borough residential zone,0426_kmeans6_airport_special,0.0790377735848827,0.0152733005640529,4,0.0850683993961906,-0.0188752057208355,4
+216,South Ozone Park,Queens,Boro Zone,False,clustered,5,Outer-borough residential zone,0426_kmeans6_airport_special,0.1195399222512618,0.0168087687817224,3,0.1657859088959471,-0.0090411290945956,4
+217,South Williamsburg,Brooklyn,Boro Zone,False,clustered,3,Housing-pressure residential zone,0426_kmeans6_airport_special,0.0743013113308031,-0.0064805730504794,1,0.1170137430496041,-0.0859073379893066,1
+218,Springfield Gardens North,Queens,Boro Zone,False,clustered,5,Outer-borough residential zone,0426_kmeans6_airport_special,0.0069868391047017,0.0038229126861312,5,0.0992819063618067,-0.0184919248543847,5
+219,Springfield Gardens South,Queens,Boro Zone,False,clustered,5,Outer-borough residential zone,0426_kmeans6_airport_special,0.1113743146643543,0.0383801741455311,5,0.1566627753499629,-0.0166716883742052,5
+220,Spuyten Duyvil/Kingsbridge,Bronx,Boro Zone,False,clustered,5,Outer-borough residential zone,0426_kmeans6_airport_special,0.0260466832548003,-0.0024090231709836,3,0.1799662123559244,0.0100256418654756,4
+221,Stapleton,Staten Island,Boro Zone,False,clustered,5,Outer-borough residential zone,0426_kmeans6_airport_special,0.1457939364297857,-0.0244826787990176,1,0.1748913064552812,-0.0110696603046686,4
+222,Starrett City,Brooklyn,Boro Zone,False,clustered,3,Housing-pressure residential zone,0426_kmeans6_airport_special,0.0023724785947342,0.0065329154110822,2,0.0263882520289008,-0.0029948939309938,4
+223,Steinway,Queens,Boro Zone,False,clustered,6,Industrial / logistics zone,0426_kmeans6_airport_special,0.1680211127100412,0.0049814928790944,1,0.2227202679002609,0.0165496410079503,4
+224,Stuy Town/Peter Cooper Village,Manhattan,Yellow Zone,False,clustered,2,Dense mixed-use neighborhood,0426_kmeans6_airport_special,0.2442752651655904,-0.0078769974577546,1,0.2541692980379198,0.0005983389155294,2
+225,Stuyvesant Heights,Brooklyn,Boro Zone,False,clustered,3,Housing-pressure residential zone,0426_kmeans6_airport_special,0.0163998131181009,-0.0063323245368774,1,0.1576722479387,-0.0058167418816436,4
+226,Sunnyside,Queens,Boro Zone,False,clustered,6,Industrial / logistics zone,0426_kmeans6_airport_special,0.167813044982086,-0.0068105311750551,1,0.2093183061710626,0.0021085693726624,4
+227,Sunset Park East,Brooklyn,Boro Zone,False,clustered,3,Housing-pressure residential zone,0426_kmeans6_airport_special,0.0125753236902264,0.0021596836808344,1,0.133989258519078,0.0213316516950824,4
+228,Sunset Park West,Brooklyn,Boro Zone,False,clustered,6,Industrial / logistics zone,0426_kmeans6_airport_special,0.0443216951026587,0.0061430109105064,1,0.1716056515926438,0.0193527818530227,4
+229,Sutton Place/Turtle Bay North,Manhattan,Yellow Zone,False,clustered,2,Dense mixed-use neighborhood,0426_kmeans6_airport_special,0.2595231540755796,0.0028324609022928,1,0.2609439908377134,0.0025937057532725,3
+230,Times Sq/Theatre District,Manhattan,Yellow Zone,False,clustered,4,CBD-accessible business core,0426_kmeans6_airport_special,0.2568671128309794,0.0051749488275353,1,0.2525224183427837,0.007275713169907,3
+231,TriBeCa/Civic Center,Manhattan,Yellow Zone,False,clustered,4,CBD-accessible business core,0426_kmeans6_airport_special,0.2439613691387305,-0.0045503973757359,1,0.2409460942891471,-0.0056822283083774,3
+232,Two Bridges/Seward Park,Manhattan,Yellow Zone,False,clustered,2,Dense mixed-use neighborhood,0426_kmeans6_airport_special,0.2032692607908392,-0.0112537899828201,1,0.2228721096842587,-0.0127361127621524,2
+233,UN/Turtle Bay South,Manhattan,Yellow Zone,False,clustered,2,Dense mixed-use neighborhood,0426_kmeans6_airport_special,0.2511103232018943,-0.0003193793514971,1,0.2506163149427339,0.0007313742828531,3
+234,Union Sq,Manhattan,Yellow Zone,False,clustered,4,CBD-accessible business core,0426_kmeans6_airport_special,0.2590996068756274,-0.0011755308583267,1,0.26227377570193,2.071185935741e-05,3
+235,University Heights/Morris Heights,Bronx,Boro Zone,False,clustered,3,Housing-pressure residential zone,0426_kmeans6_airport_special,0.0050989415597649,0.0035820568454225,1,0.0501922107056468,-0.0081870861235288,1
+236,Upper East Side North,Manhattan,Yellow Zone,False,clustered,2,Dense mixed-use neighborhood,0426_kmeans6_airport_special,0.2639321621572147,0.00305913613335,1,0.2671103497589992,0.0008554685002812,3
+237,Upper East Side South,Manhattan,Yellow Zone,False,clustered,2,Dense mixed-use neighborhood,0426_kmeans6_airport_special,0.2684488785123257,0.0041771388791621,1,0.2700193601236309,-7.063612832265883e-05,3
+238,Upper West Side North,Manhattan,Yellow Zone,False,clustered,2,Dense mixed-use neighborhood,0426_kmeans6_airport_special,0.2603247650066,0.0011952829250689,1,0.2612994243098112,0.0018198835777193,3
+239,Upper West Side South,Manhattan,Yellow Zone,False,clustered,2,Dense mixed-use neighborhood,0426_kmeans6_airport_special,0.2691619482661674,0.0088148455650205,1,0.2683550365568423,0.005471039410156,3
+240,Van Cortlandt Park,Bronx,Boro Zone,False,clustered,1,Recreation / open-space zone,0426_kmeans6_airport_special,0.0232491609994705,0.0091928369872818,5,0.1040788686236781,-0.0129917475590652,2
+241,Van Cortlandt Village,Bronx,Boro Zone,False,clustered,3,Housing-pressure residential zone,0426_kmeans6_airport_special,0.0070640099101453,0.0028016237897655,3,0.0963073029405553,-0.0038136550532277,4
+242,Van Nest/Morris Park,Bronx,Boro Zone,False,clustered,3,Housing-pressure residential zone,0426_kmeans6_airport_special,0.0070650778879121,-0.002875211756443,3,0.0580244471723458,0.0217068180485186,1
+243,Washington Heights North,Manhattan,Boro Zone,False,clustered,5,Outer-borough residential zone,0426_kmeans6_airport_special,0.090610029134819,0.0008604079592109,1,0.2005752157769747,0.0132781977819683,4
+244,Washington Heights South,Manhattan,Boro Zone,False,clustered,3,Housing-pressure residential zone,0426_kmeans6_airport_special,0.1301781953330133,-0.0082441040758053,1,0.1851846143910933,-0.0021700017150463,3
+245,West Brighton,Staten Island,Boro Zone,False,clustered,5,Outer-borough residential zone,0426_kmeans6_airport_special,0.1792416556122039,0.0146827677542947,1,0.1879470245968297,0.0026395450738828,4
+246,West Chelsea/Hudson Yards,Manhattan,Yellow Zone,False,clustered,2,Dense mixed-use neighborhood,0426_kmeans6_airport_special,0.2477253500254718,-0.004169759709019,1,0.2503931291193327,-0.0047336395791763,3
+247,West Concourse,Bronx,Boro Zone,False,clustered,3,Housing-pressure residential zone,0426_kmeans6_airport_special,0.0542577478709411,-0.0142752323218385,1,0.1359630545505171,-0.0158174025788785,1
+248,West Farms/Bronx River,Bronx,Boro Zone,False,clustered,3,Housing-pressure residential zone,0426_kmeans6_airport_special,0.0056552061612694,-0.0059846142030173,2,0.0660140757821398,-0.005440407188224,1
+249,West Village,Manhattan,Yellow Zone,False,clustered,2,Dense mixed-use neighborhood,0426_kmeans6_airport_special,0.2552714792600892,0.0027617551454419,1,0.2666036460095429,0.0089618100487959,3
+250,Westchester Village/Unionport,Bronx,Boro Zone,False,clustered,3,Housing-pressure residential zone,0426_kmeans6_airport_special,0.0103939591423974,0.0054318415460266,1,0.0689550326953418,0.0092187174613287,4
+251,Westerleigh,Staten Island,Boro Zone,False,clustered,5,Outer-borough residential zone,0426_kmeans6_airport_special,0.0966210745766455,-0.0555629907058262,1,0.1898789875147421,0.0020734175689457,4
+252,Whitestone,Queens,Boro Zone,False,clustered,5,Outer-borough residential zone,0426_kmeans6_airport_special,0.0390396377122028,-0.0067564697737415,1,0.1811563264796923,0.005009949018002,4
+253,Willets Point,Queens,Boro Zone,False,clustered,6,Industrial / logistics zone,0426_kmeans6_airport_special,0.1604853892204693,0.0378465293064671,1,0.1851053998118603,-0.0091660052793265,4
+254,Williamsbridge/Olinville,Bronx,Boro Zone,False,clustered,3,Housing-pressure residential zone,0426_kmeans6_airport_special,0.0027110796259442,0.0111968007700198,4,0.0522885634772543,0.0056790519770562,4
+255,Williamsburg (North Side),Brooklyn,Boro Zone,False,clustered,2,Dense mixed-use neighborhood,0426_kmeans6_airport_special,0.2095175661861278,0.0133559051850308,1,0.2089446087441727,-0.0046280803902589,4
+256,Williamsburg (South Side),Brooklyn,Boro Zone,False,clustered,2,Dense mixed-use neighborhood,0426_kmeans6_airport_special,0.1912290262768702,0.0045604990267784,1,0.2070026433066019,-0.010867076672608,3
+257,Windsor Terrace,Brooklyn,Boro Zone,False,clustered,5,Outer-borough residential zone,0426_kmeans6_airport_special,0.0605280677295728,0.0036392698346115,1,0.2142786926046846,0.0273348857141778,4
+258,Woodhaven,Queens,Boro Zone,False,clustered,5,Outer-borough residential zone,0426_kmeans6_airport_special,0.0137887076547833,-0.0111121796219639,2,0.1172910407618569,-0.0256972579717596,4
+259,Woodlawn/Wakefield,Bronx,Boro Zone,False,clustered,5,Outer-borough residential zone,0426_kmeans6_airport_special,0.0075003243957045,0.0177310060503257,4,0.0872243456681412,0.0163001225663214,5
+260,Woodside,Queens,Boro Zone,False,clustered,6,Industrial / logistics zone,0426_kmeans6_airport_special,0.1534182263917597,-0.011778538488026,1,0.1997337736810213,-0.0008582150179512,4
+261,World Trade Center,Manhattan,Yellow Zone,False,clustered,4,CBD-accessible business core,0426_kmeans6_airport_special,0.2301682066625909,-0.0130909705382812,1,0.2237587613303235,-0.0081027102471395,3
+262,Yorkville East,Manhattan,Yellow Zone,False,clustered,2,Dense mixed-use neighborhood,0426_kmeans6_airport_special,0.2560315854111445,0.0029900047453016,1,0.2572182988760563,0.0018902506734102,3
+263,Yorkville West,Manhattan,Yellow Zone,False,clustered,2,Dense mixed-use neighborhood,0426_kmeans6_airport_special,0.2645491923356246,0.0055800071142914,1,0.2599083770324311,0.0016938046840218,4

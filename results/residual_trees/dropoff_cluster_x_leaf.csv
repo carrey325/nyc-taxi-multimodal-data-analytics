@@ -1,0 +1,21 @@
+cluster_id,cluster_name,tree_leaf_id,zone_count,zones_with_target,mean_residualized_tip_rate,mean_raw_longrun_tip_rate,representative_zones
+1,Recreation / open-space zone,1,1,1,-0.0193369650668054,0.0954783518172735,Crotona Park
+1,Recreation / open-space zone,2,11,11,-0.00032259823998110904,0.17347056296461194,Astoria Park; Battery Park; Bronx Park
+1,Recreation / open-space zone,5,4,4,0.07518305554511505,0.1043453799438008,Jamaica Bay; Breezy Point/Fort Tilden/Riis Beach; Freshkills Park
+2,Dense mixed-use neighborhood,2,5,5,-0.0080240295034519,0.22275485897263017,Alphabet City; DUMBO/Vinegar Hill; Fort Greene
+2,Dense mixed-use neighborhood,3,35,35,-0.0013439149826244721,0.24358962465405495,Battery Park City; Bloomingdale; Boerum Hill
+2,Dense mixed-use neighborhood,4,10,10,0.004264201315279006,0.2160577233221171,Carroll Gardens; Cobble Hill; Columbia Street
+3,Housing-pressure residential zone,1,25,25,-0.010911011334404579,0.10274136509570393,Bedford; Belmont; Borough Park
+3,Housing-pressure residential zone,2,2,2,-0.0034681894413526497,0.05365226822666244,East New York; Soundview/Castle Hill
+3,Housing-pressure residential zone,3,4,4,-0.00727679587759135,0.16126789369101965,Central Harlem North; Hamilton Heights; Ocean Hill
+3,Housing-pressure residential zone,4,19,19,0.0030605855462728215,0.09754561171106416,Bedford Park; Brighton Beach; Bronxdale
+3,Housing-pressure residential zone,5,1,1,0.0065620161508552,0.0737456460830553,Pelham Bay Park
+4,CBD-accessible business core,2,1,1,-0.0032392677378215,0.1932723298148834,Downtown Brooklyn/MetroTech
+4,CBD-accessible business core,3,16,16,-0.0023688170193340028,0.24637747020744719,Financial District North; Financial District South; Garment District
+4,CBD-accessible business core,4,1,1,0.0133491001343913,0.2680806419360244,Flatiron
+5,Outer-borough residential zone,2,10,10,-0.00893445025927399,0.13007322979134953,Canarsie; Cypress Hills; Dyker Heights
+5,Outer-borough residential zone,4,70,69,0.0012085195856238072,0.14407618095432734,Allerton/Pelham Gardens; Arrochar/Fort Wadsworth; Astoria
+5,Outer-borough residential zone,5,27,27,0.007817670866962109,0.12292752517041575,Arden Heights; Baisley Park; Bellerose
+6,Industrial / logistics zone,1,2,2,-0.01347821080650605,0.10927714160375115,Hunts Point; Mott Haven/Port Morris
+6,Industrial / logistics zone,2,2,2,-0.033341840310637604,0.15804162249869297,Queensbridge/Ravenswood; Saint Michaels Cemetery/Woodside
+6,Industrial / logistics zone,4,11,11,0.005443393003629864,0.20455245225268273,East Williamsburg; Gowanus; Greenpoint
