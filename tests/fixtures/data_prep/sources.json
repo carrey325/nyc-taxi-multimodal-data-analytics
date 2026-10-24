@@ -1,0 +1,5 @@
+{
+  "trips.csv": {"source_id": "synthetic_trips", "status": "synthetic", "release_info": "synthetic", "acquired_at": "synthetic", "public_url": "synthetic", "schema_version": "synthetic-tlc-v1"},
+  "zones.csv": {"source_id": "synthetic_zones", "status": "synthetic", "release_info": "synthetic", "acquired_at": "synthetic", "public_url": "synthetic", "schema_version": "synthetic-zones-v1"},
+  "weather.csv": {"source_id": "synthetic_weather", "status": "synthetic", "release_info": "synthetic", "acquired_at": "synthetic", "public_url": "synthetic", "schema_version": "synthetic-weather-v1"}
+}

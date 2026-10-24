@@ -1,3 +1,5 @@
 * text=auto
 *.png binary
+tests/fixtures/data_prep/*.csv text eol=lf
+tests/fixtures/data_prep/*.json text eol=lf
 

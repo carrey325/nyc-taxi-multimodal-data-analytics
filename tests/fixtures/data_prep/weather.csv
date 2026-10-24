@@ -1,0 +1,3 @@
+weather_record_id,station_id,observed_at,available_at,temperature_c,precipitation_mm
+SYN_W1,SYN_NYC,2024-01-15T15:00:00Z,2024-01-15T15:05:00Z,4,0
+SYN_W2,SYN_NYC,2024-01-15T16:00:00Z,2024-01-15T16:05:00Z,5,0.2
