@@ -2,7 +2,44 @@
 
 This course project examines NYC taxi tipping through four parallel analytical lenses. Taxi records provide the common outcome, while trip structure, urban context, basketball events, and weather provide distinct explanations of when and where tipping patterns change.
 
-The repository is a compact project showcase. It retains final scripts, selected result tables, and presentation-ready figures while excluding raw trip data, large intermediate files, notebooks, logs, caches, and superseded drafts.
+The repository is a compact project showcase. It retains final scripts, selected result tables, presentation-ready figures, and one synthetic data-preparation walkthrough. Raw research data, large intermediate files, exploratory notebooks, logs, caches, and superseded drafts are excluded.
+
+## Data preparation walkthrough
+
+The [data-preparation report](reports/data_preparation.md) records recovered
+cleaning policies and their sources. The [English notebook](notebooks/01_data_preparation.ipynb)
+demonstrates lineage, target definitions, DST quarantine, checked Zone/weather
+joins, grouped splits and stable sampling on **33 entirely synthetic records**.
+This is a reconstructed public demo, not a reproduction of historical samples
+or model results.
+
+From the repository root, install the pinned dependencies once, then run offline:
+
+```bash
+python -m pip install -r requirements-dev.txt
+python -m unittest discover -s tests -p "test_data_prep_*.py" -v
+python scripts/build_trip_sample.py --config configs/data_prep_demo.json --input-dir tests/fixtures/data_prep --output-dir .runs/data_prep_demo
+python -m nbconvert --to notebook --execute notebooks/01_data_preparation.ipynb --output executed.ipynb --output-dir .runs/data_prep_notebook
+```
+
+Choose a new output directory when rerunning the CLI; occupied directories are
+refused. Tests, CLI and notebook need no network, API key or research warehouse
+after installation. The notebook creates its own temporary output directory.
+
+| Output | Purpose |
+| --- | --- |
+| `trip_sample.parquet` | Prepared synthetic sample with raw fields, lineage, match flags, splits and ranks |
+| `source_manifest.json` | Logical filenames, SHA256, schemas, counts, source status and code provenance |
+| `quality_report.json`, `sample_flow.csv` | Stage counts, missingness, join diagnostics and ID digests |
+| `exclusion_ledger.csv`, `sampling_audit.csv` | Row-level reasons and per-split/per-stratum selection counts |
+| `effective_policy.json` | Exact units, modes, thresholds and rule provenance used |
+
+The default flow is **33 → 30 time-valid → 23 eligible → 14 selected**.
+Weather matching is descriptive; future observations may be selected within
+the explicit tolerance and are flagged. Predictive availability mode is refused.
+The sample is not a complete input for the historical weather formulas;
+[consumer requirements and missing fields](reports/data_preparation.md#consumer-boundaries)
+are documented.
 
 ## Four analytical lenses
 

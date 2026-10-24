@@ -78,3 +78,119 @@ The new tests, CLI and notebook verify synthetic inputs only. Historical
 are quoted research outcomes, not verified by this demo. The old OLS/LightGBM
 same-sample comparison, model re-estimation, full source builders and large-data
 throughput benchmarks are deferred.
+
+## Data dictionary and identities
+
+Raw TLC-style columns are retained unchanged. Additional normalized columns
+use the following contract:
+
+| Columns | Type/unit | Meaning |
+| --- | --- | --- |
+| source_id, source_file_name, source_file_sha256 | string | Logical source and exact file bytes; no absolute path |
+| source_row_number | nonnegative integer | Zero-based original data-record ordinal before filtering; CSV header is excluded, a quoted multiline record counts once |
+| trip_id | SHA256 hex | Canonical JSON `["source-row-v1", file_sha256, ordinal]`, encoded as UTF-8 |
+| record_fingerprint | SHA256 hex | Canonical JSON `["record-v1", pairs]`; pairs are sorted canonical keys from the configured eight raw columns, with null/empty as null and other values as strings |
+| fare_usd, tip_usd | numeric USD | Parsed copies, preserving original raw columns |
+| distance_miles | numeric miles | Missing or invalid values remain missing |
+| payment_code, pu_location_id, do_location_id | nullable integer | Noninteger/invalid identifiers become missing |
+| pickup_time, dropoff_time | raw timestamp representation | Original timezone evidence |
+| pickup_utc, dropoff_utc, pickup_local | aware timestamp | UTC for elapsed time, configured local timezone for features |
+| trip_duration_minutes, average_speed_mph | minutes, miles/hour | Derived from UTC duration; invalid inputs are not filled with zero |
+| pickup_hour, pickup_weekday | local hour, English day name | Local calendar features |
+| tip_rate_fare | fraction | tip/fare for nonnegative card tips and positive finite fare; .2 means 20% |
+| tip_or_not | nullable 0/1 | Positive tip indicator for eligible card recording; non-card is missing |
+| pickup/dropoff_zone, pickup/dropoff_borough | string | Many-to-one Zone labels |
+| pickup/dropoff_zone_matched | bool | Unmatched IDs remain in the left table |
+| weather_station_id, weather_record_id | nullable string | Configured station and selected source observation |
+| weather_observed_at, weather_available_at | aware UTC or missing | Observation time and separately declared publication time |
+| temperature_c, precipitation_mm | degrees Celsius, mm | Two fixture weather measurements only |
+| weather_lag_minutes | signed minutes | Observation minus pickup; positive means future observation |
+| weather_matched, weather_descriptive_only | bool | Match flag and explicit descriptive-only label |
+| weather_observation_after_pickup, weather_available_after_pickup | nullable bool | Missing when no observation or availability information exists |
+| weather_mode | string | nearest_observation; tie selects earlier observation |
+| split_label, split_bucket | string, integer 0–99 | train <70, validation 70–84, test >=85 |
+| split_policy, split_version, split_seed | string | Original split metadata retained if supplied; otherwise explicit new policy |
+| sample_hash, sample_rank, sample_version, sample_seed | hex, integer, string, integer | Stable ranking and sampling provenance |
+
+The content fingerprint excludes `fixture_case`, source name, source ID and
+record ordinal. It detects identical values in this explicit field set,
+not every semantic duplicate: a differently formatted numeric/time value may
+have a different fingerprint. Identical-looking physical records are retained.
+Confirmed duplicate file imports and duplicate trip IDs are rejected.
+
+Renaming a byte-identical file preserves IDs. Re-encoding or changing line
+endings changes the file digest and IDs by design. Fixture CSV files are
+checked out with LF endings to keep the published example consistent.
+Chunking must occur after original ordinals are attached by the source reader.
+This implementation targets in-memory samples, not a 780M-row execution engine.
+
+## Audit and sampling decisions
+
+The main sample includes nonnegative card tips. Selecting `positive_tip`
+excludes zero tips and changes the estimand; the notebook shows that difference.
+Each exclusion ledger row carries a reason. The first reason per trip is primary
+and sums to total exclusions; overlapping reasons are separately counted.
+Sampling omissions are reported as sampling removals, not economic exclusions.
+
+The default sample flow is:
+
+| Stage | Input | Output | Removed |
+| --- | ---: | ---: | ---: |
+| Source records | 33 | 33 | 0 |
+| Timestamp normalization | 33 | 30 | 3 |
+| Card/economic filter | 30 | 23 | 7 |
+| Zone left join | 23 | 23 | 0 |
+| Descriptive weather join | 23 | 23 | 0 |
+| Optional match filter | 23 | 23 | 0 |
+| Group split | 23 | 23 | 0 |
+| Fixed-cap sample | 23 | 14 | 9 |
+
+One pickup zone, one dropoff zone and two weather observations are unmatched
+before sampling. The identical-content pair is retained before sampling and
+assigned to one split. Sampling caps apply separately to each split and each
+tip_or_not stratum; empty strata appear with zero counts.
+
+New split buckets are SHA256 of canonical JSON
+`["sha256-group-v1", seed, record_fingerprint]` modulo 100.
+Sampling sorts SHA256 of `["sha256-rank-v1", seed, trip_id]`, then trip_id,
+and takes min(cap, eligible count). ID audits hash
+`["sorted-trip-ids-v1", sorted_ids]`. All JSON hash encodings use sorted
+object keys, compact separators, UTF-8 and no nonfinite JSON numbers.
+These are within-period partitions, not a forward forecasting evaluation.
+
+If an input already has buckets, they must all be valid integers in 0–99.
+Valid buckets are preserved and checked against any supplied labels.
+Duplicate-content groups crossing existing splits cause an error, not reassignment.
+No winsorization or category fitting is introduced in the demo; the existing
+weather helper's training-only category behavior is covered by a test.
+
+Nearest weather is explicitly descriptive: it may select an observation
+after pickup, and the lag/availability flags reveal that choice. Missing
+available_at stays unknown. The fixture's available_at is an invented release
+time, not an alias for observed_at. `asof_available` is unimplemented and
+refused, even if the caller supplies an available_at column.
+
+## Consumer boundaries
+
+The existing weather model requires a richer prepared input. Its full input
+contract, before its internal category preparation and extreme-temperature
+calculation, includes:
+
+- Trip/control fields: fare_amount, trip_distance, fare_per_mile,
+  trip_duration_minutes, average_speed_mph, passenger_count, tolls_amount,
+  extra, mta_tax, improvement_surcharge, is_airport_trip, RatecodeID, VendorID,
+  hour_of_day, pickup_weekday, pickup_month, is_holiday, PULocationID,
+  DOLocationID, tip_rate_fare, is_late_night.
+- Weather fields: temperature, apparent_temp, precipitation, snowfall,
+  snow_depth, wind_speed, humidity, cloud_cover, is_raining, is_snowing.
+- Optional split_bucket; the new demo supplies it explicitly.
+
+The synthetic output supplies only a subset. It lacks passenger/vendor/rate-code,
+fare component and scenario controls; it uses pickup_hour instead of hour_of_day
+and temperature_c/precipitation_mm instead of the historical weather names.
+It lacks the richer weather variables. Raw CSV fields remain strings, so an
+explicit typed adapter would also be needed. No model is run as an acceptance
+check, and this sample is not advertised as a drop-in weather-model input.
+
+The spatial panels and feature matrices remain separate prepared inputs.
+The Knicks event-tagging contract is likewise not rebuilt by this trip demo.
