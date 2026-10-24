@@ -39,6 +39,7 @@ class CLI(unittest.TestCase):
             self.assertTrue(joins.removed_rows.eq(0).all())
             self.assertEqual(quality["joins"]["zones"]["pickup_unmatched_rows"], 1)
             self.assertEqual(quality["joins"]["weather"]["unmatched_rows"], 2)
+            self.assertEqual(flow.loc[flow.stage.eq("zone_join"), "unmatched_rows"].iloc[0], 2)
             sample = pd.read_parquet(out / "trip_sample.parquet")
             self.assertEqual(len(sample), quality["sample_rows"])
             self.assertEqual(sample.trip_id.nunique(), len(sample))
@@ -111,6 +112,11 @@ class CLI(unittest.TestCase):
             quality = run_preparation(CONFIG, inputs, out)
             self.assertEqual(quality["sample_rows"], 0)
             self.assertTrue(pd.read_parquet(out / "trip_sample.parquet").empty)
+
+    def test_raw_empty_strings_reported_missing(self):
+        with tempfile.TemporaryDirectory() as directory:
+            quality = run_preparation(CONFIG, FIXTURES, Path(directory) / "output")
+            self.assertEqual(quality["stages"][0]["missing_rates"]["trip_distance"], 2 / 33)
 
 
 if __name__ == "__main__":

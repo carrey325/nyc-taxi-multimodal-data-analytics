@@ -28,7 +28,7 @@
     "columns_and_units": {"status": "recovered", "source": "baseline-source; weather-07", "note": "TLC-style names, payment=1, USD, miles, minute duration and ratio target recovered; fixture column mapping is synthetic."},
     "card_target": {"status": "recovered", "source": "weather-07", "note": "Card sample includes zero tips; baseline main sample uses positive tips. Demo supports both explicitly."},
     "time_resolution": {"status": "demo_assumption", "source": "demo-policy-v1", "note": "Naive New York times; ambiguous/nonexistent times quarantined. No historical timezone guarantee."},
-    "economic_filters": {"status": "demo_assumption", "source": "demo-policy-v1", "note": "Positive finite fare, distance and duration; nonnegative finite tips; no default upper caps. Historical caps documented separately."},
+    "economic_filters": {"status": "demo_assumption", "source": "demo-policy-v1", "note": "Positive finite fare, distance and duration; nonnegative finite tips; finite derived target and speed; no default upper caps. Missing values are excluded for CSV and nullable Parquet alike. Historical caps documented separately."},
     "identity_and_duplicates": {"status": "demo_assumption", "source": "demo-policy-v1", "note": "File bytes plus original record ordinal identify rows; identical content retained and grouped."},
     "zone_join": {"status": "demo_assumption", "source": "demo-policy-v1", "note": "Unique-key left joins with explicit match flags."},
     "weather_join": {"status": "demo_assumption", "source": "demo-policy-v1", "note": "Synthetic station mapping and 60-minute tolerance; nearest descriptive observation, earlier tie."},

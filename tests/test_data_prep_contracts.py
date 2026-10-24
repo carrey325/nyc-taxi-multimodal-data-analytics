@@ -1,4 +1,6 @@
 import copy
+import hashlib
+import io
 import json
 from pathlib import Path
 import shutil
@@ -126,6 +128,38 @@ class Contracts(unittest.TestCase):
         bad["trip_id"] = "collision"
         with self.assertRaisesRegex(ValueError, "reserved"):
             prep.normalize_trips(bad, self.source, self.policy)
+
+    def test_nullable_parquet_missing_economic_values_are_excluded(self):
+        reasons = {"fare_amount": "fare_not_positive_finite",
+                   "tip_amount": "tip_negative_or_nonfinite",
+                   "trip_distance": "distance_not_positive_finite"}
+        for column, reason in reasons.items():
+            with self.subTest(column=column):
+                raw = self.raw.iloc[:1].copy()
+                for field in reasons:
+                    raw[field] = pd.to_numeric(raw[field]).astype("Float64")
+                raw.loc[0, column] = pd.NA
+                buffer = io.BytesIO()
+                raw.to_parquet(buffer, index=False)
+                source = dict(self.source, file_name="nullable.parquet",
+                              sha256=hashlib.sha256(buffer.getvalue()).hexdigest())
+                buffer.seek(0)
+                normalized, _ = prep.normalize_trips(pd.read_parquet(buffer), source, self.policy)
+                kept, ledger = prep.filter_trips(normalized, self.policy)
+                self.assertTrue(kept.empty)
+                self.assertEqual(ledger.loc[ledger.is_primary, "reason"].tolist(), [reason])
+                self.assertEqual(len(normalized), len(kept) + ledger.is_primary.sum())
+
+    def test_nonfinite_derived_values_do_not_enter_sample(self):
+        for field, value, reason in (("fare_amount", "1e-310", "tip_rate_nonfinite"),
+                                     ("trip_distance", "1e308", "speed_nonfinite")):
+            with self.subTest(field=field):
+                raw = self.raw.iloc[:1].copy()
+                raw[field] = value
+                normalized, _ = prep.normalize_trips(raw, self.source, self.policy)
+                kept, ledger = prep.filter_trips(normalized, self.policy)
+                self.assertTrue(kept.empty)
+                self.assertIn(reason, ledger.reason.tolist())
 
 
 if __name__ == "__main__":

@@ -79,8 +79,11 @@ are documented.
 ## Repository contents
 
 ```text
-scripts/                         Final model and spatial-analysis scripts
-reports/                         Integrated methodology and findings report
+scripts/                         Analysis scripts and preparation functions
+reports/                         Research findings and preparation policies
+configs/                         Explicit synthetic preparation policy
+notebooks/                       Executed English preparation walkthrough
+tests/                           Preparation tests and tiny synthetic fixtures
 results/baseline/                Taxi-only benchmark metrics
 results/typology/                Spatial cluster summaries and zone labels
 results/residual_trees/          Residual models, tree diagnostics, and rules

@@ -239,11 +239,20 @@ def filter_trips(frame: pd.DataFrame, policy: dict) -> tuple[pd.DataFrame, pd.Da
     assert_unique_ids(frame)
     f = policy["filter"]
     reasons = {
-        "fare_not_positive_finite": ~np.isfinite(frame.fare_usd) | frame.fare_usd.le(0),
-        "tip_negative_or_nonfinite": ~np.isfinite(frame.tip_usd) | frame.tip_usd.lt(0),
-        "distance_not_positive_finite": ~np.isfinite(frame.distance_miles) | frame.distance_miles.le(0),
-        "duration_not_positive_finite": ~np.isfinite(frame.trip_duration_minutes) | frame.trip_duration_minutes.le(0),
+        "fare_not_positive_finite": frame.fare_usd.isna() | ~np.isfinite(frame.fare_usd) | frame.fare_usd.le(0),
+        "tip_negative_or_nonfinite": frame.tip_usd.isna() | ~np.isfinite(frame.tip_usd) | frame.tip_usd.lt(0),
+        "distance_not_positive_finite": frame.distance_miles.isna() | ~np.isfinite(frame.distance_miles) | frame.distance_miles.le(0),
+        "duration_not_positive_finite": frame.trip_duration_minutes.isna() | ~np.isfinite(frame.trip_duration_minutes) | frame.trip_duration_minutes.le(0),
     }
+    # Nullable Parquet values must fail closed; finite inputs can also overflow
+    # during division. Record that separately from invalid source values.
+    valid_target_inputs = (~reasons["fare_not_positive_finite"]
+                           & ~reasons["tip_negative_or_nonfinite"]
+                           & frame.payment_code.isin(f["card_values"]))
+    valid_speed_inputs = (~reasons["distance_not_positive_finite"]
+                          & ~reasons["duration_not_positive_finite"])
+    reasons["tip_rate_nonfinite"] = valid_target_inputs & ~np.isfinite(frame.tip_rate_fare).fillna(False)
+    reasons["speed_nonfinite"] = valid_speed_inputs & ~np.isfinite(frame.average_speed_mph).fillna(False)
     caps = {"max_duration_minutes": "trip_duration_minutes", "max_fare_usd": "fare_usd",
             "max_tip_usd": "tip_usd", "max_distance_miles": "distance_miles",
             "max_speed_mph": "average_speed_mph", "max_tip_rate": "tip_rate_fare"}

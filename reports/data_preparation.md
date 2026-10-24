@@ -35,7 +35,7 @@ decision. These labels do not certify the execution of the historical sample.
 | --- | --- | --- | --- |
 | Card code and target | Baseline and weather-07 use payment_type=1; tip/fare is a fraction | Explicit card_values=[1]; cash tips are not treated as true zeros | recovered |
 | Sample policy | Baseline main outcome is positive-tip card; weather-07 saves all eligible cards then defines a positive-tip subset | all_card_nonnegative main; positive_tip comparison | recovered |
-| Validity order | Positive fare; nonnegative tip; positive distance; duration (0,240]; fare<=500, tip<=200, distance<=100, speed<=80; card; tip/fare in [0,2] | Positive finite fare/distance/duration and finite nonnegative tip; optional caps are null by default | recovered thresholds; demo_assumption defaults |
+| Validity order | Positive fare; nonnegative tip; positive distance; duration (0,240]; fare<=500, tip<=200, distance<=100, speed<=80; card; tip/fare in [0,2] | Positive finite fare/distance/duration and finite nonnegative tip; finite derived target/speed; optional caps are null by default | recovered thresholds; demo_assumption defaults |
 | Date window | Baseline defaults to 2024, but saved output is January 2024; weather-07 filters 2023–2025 | Synthetic dates only; no recovered historical configuration claimed | recovered |
 | Time interpretation | Historical SQL/Spark handles timestamps without a demonstrated DST-resolution contract | Explicit naive/aware setting; New York local features; ambiguous/nonexistent times quarantined | demo_assumption |
 | Identity | Historical models hash selected fields, not a natural TLC trip ID | Versioned file-SHA256 plus original record ordinal; separate content fingerprint | demo_assumption |
@@ -131,6 +131,15 @@ excludes zero tips and changes the estimand; the notebook shows that difference.
 Each exclusion ledger row carries a reason. The first reason per trip is primary
 and sums to total exclusions; overlapping reasons are separately counted.
 Sampling omissions are reported as sampling removals, not economic exclusions.
+Missing numeric values are excluded for both CSV and nullable Parquet columns.
+If finite inputs overflow during target or speed calculation, a distinct
+`tip_rate_nonfinite` or `speed_nonfinite` reason excludes the unusable row.
+This numerical validity check does not impose an upper-value cutoff.
+
+Stage missing rates count null values and empty raw CSV strings. Stage
+`unmatched_rows` counts the union of rows failing any relationship joined so
+far; separate pickup, dropoff and weather counts identify each relationship.
+A null count means that relationship has not yet been joined, not zero failures.
 
 The default sample flow is:
 
@@ -197,10 +206,13 @@ The Knicks event-tagging contract is likewise not rebuilt by this trip demo.
 
 ## Verification record
 
-On 2026-10-24, the synthetic CLI, unit suite and notebook were executed using
+On 2026-10-24, the synthetic CLI, all 27 unit tests and notebook were executed using
 Python 3.13.7, pandas 3.0.2, NumPy 2.4.4 and PyArrow 23.0.1.
 Notebook tooling was nbconvert 7.16.6 and ipykernel 6.29.5; existing analysis
-dependency pins were retained. The executed notebook has compact outputs and
+dependency pins were retained. All eight code cells completed without cell errors.
+Regression coverage includes nullable Parquet missing values, arithmetic overflow,
+Zone unmatched counts and raw CSV empty-string missingness.
+The executed notebook has compact outputs and
 was rendered to HTML for visual review. Generated runtime files remain ignored.
 
 On this Windows host, Jupyter needed local kernel socket access outside the
@@ -208,3 +220,6 @@ execution sandbox, and a temporary clean Jupyter configuration avoided an
 unrelated global extension. This did not require external data access or
 changes to the user's global configuration. These are environment setup
 observations, not dependencies of the preparation functions.
+The final run also emitted a native ZeroMQ connection-reset diagnostic during
+kernel shutdown; nbconvert exited successfully and all saved cell outputs were
+checked. No notebook cell failed.

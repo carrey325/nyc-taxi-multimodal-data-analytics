@@ -15,7 +15,7 @@ from prepare_trips import (
     assert_unique_ids, digest_payload, exclusion_ledger, filter_trips, load_policy,
     normalize_trips, read_trip_source,
 )
-from prep_joins import join_weather, join_zones
+from prep_joins import join_weather, join_zones, missing_rates
 from prep_sampling import assign_splits, ids_digest, sample_trips
 from research_config import PROJECT_ROOT
 
@@ -37,10 +37,16 @@ def _snapshot() -> dict:
 
 
 def _stage(name: str, before: int, frame: pd.DataFrame) -> dict:
+    relationships = {"pickup": "pickup_zone_matched", "dropoff": "dropoff_zone_matched",
+                     "weather": "weather_matched"}
+    flags = [flag for flag in relationships.values() if flag in frame]
+    unmatched = ~frame[flags] if flags else None
     return dict(stage=name, input_rows=before, output_rows=len(frame), removed_rows=before-len(frame),
                 duplicate_rows=int(frame.record_fingerprint.duplicated().sum()) if "record_fingerprint" in frame else 0,
-                unmatched_rows=int((~frame.weather_matched).sum()) if "weather_matched" in frame else 0,
-                missing_rates={c: float(frame[c].isna().mean()) if len(frame) else None for c in frame})
+                unmatched_rows=int(unmatched.any(axis=1).sum()) if flags else None,
+                **{f"{side}_unmatched_rows": int(unmatched[flag].sum()) if flag in frame else None
+                   for side, flag in relationships.items()},
+                missing_rates=missing_rates(frame))
 
 
 def _validate_output(config: Path, inputs: Path, output: Path) -> None:

@@ -13,8 +13,10 @@ def _check_preserved(before: pd.DataFrame, after: pd.DataFrame) -> None:
         raise ValueError("Left join changed trip identities or order")
 
 
-def _missing_rates(frame: pd.DataFrame) -> dict:
-    return {col: float(frame[col].isna().mean()) if len(frame) else None for col in frame}
+def missing_rates(frame: pd.DataFrame) -> dict:
+    """Count nulls and empty raw CSV strings without changing source values."""
+    return {col: float((frame[col].isna() | frame[col].eq("")).mean()) if len(frame) else None
+            for col in frame}
 
 
 def join_zones(trips: pd.DataFrame, zones: pd.DataFrame) -> tuple[pd.DataFrame, dict]:
@@ -42,7 +44,7 @@ def join_zones(trips: pd.DataFrame, zones: pd.DataFrame) -> tuple[pd.DataFrame, 
         audit[f"{side}_matched_rows"] = int(result[f"{side}_zone_matched"].sum())
         audit[f"{side}_unmatched_rows"] = len(result) - audit[f"{side}_matched_rows"]
     _check_preserved(trips, result)
-    audit.update(output_rows=len(result), missing_rates=_missing_rates(result))
+    audit.update(output_rows=len(result), missing_rates=missing_rates(result))
     return result, audit
 
 
@@ -139,5 +141,5 @@ def join_weather(trips: pd.DataFrame, weather: pd.DataFrame, policy: dict) -> tu
                  available_at_semantics=cfg["available_at_semantics"],
                  lag_minutes_min=float(lags.min()) if len(lags) else None,
                  lag_minutes_max=float(lags.max()) if len(lags) else None,
-                 missing_rates=_missing_rates(result))
+                 missing_rates=missing_rates(result))
     return result, audit
