@@ -1,0 +1,39 @@
+{
+  "version": "data-prep-demo-v1",
+  "status": "reconstructed_public_demo",
+  "inputs": {
+    "trips": ["trips.csv"],
+    "zones": "zones.csv",
+    "weather": "weather.csv",
+    "metadata": "sources.json"
+  },
+  "columns": {
+    "pickup_time": "tpep_pickup_datetime",
+    "dropoff_time": "tpep_dropoff_datetime",
+    "fare_usd": "fare_amount",
+    "tip_usd": "tip_amount",
+    "distance_miles": "trip_distance",
+    "payment_code": "payment_type",
+    "pu_location_id": "PULocationID",
+    "do_location_id": "DOLocationID"
+  },
+  "units": {"money": "USD", "distance": "mile", "duration": "minute", "speed": "mph", "tip_rate": "fraction"},
+  "time": {"input_kind": "naive", "source_timezone": "America/New_York", "feature_timezone": "America/New_York", "ambiguous": "quarantine", "nonexistent": "quarantine"},
+  "filter": {"card_values": [1], "sample_policy": "all_card_nonnegative", "max_duration_minutes": null, "max_fare_usd": null, "max_tip_usd": null, "max_distance_miles": null, "max_speed_mph": null, "max_tip_rate": null},
+  "weather": {"mode": "nearest_observation", "tolerance_minutes": 60, "station_by_pickup_zone": {"164": "SYN_NYC", "186": "SYN_NYC", "132": "SYN_NYC"}, "observed_at_kind": "aware", "available_at_semantics": "synthetic_release_time", "units": {"temperature_c": "degC", "precipitation_mm": "mm"}},
+  "match_filter": {"require_pickup_zone": false, "require_dropoff_zone": false, "require_weather": false},
+  "split": {"mode": "hash_group", "version": "sha256-group-v1", "seed": 42, "train_end": 70, "validation_end": 85, "existing_bucket": "preserve", "existing_policy": "external_bucket", "existing_version": "unknown", "existing_seed": "unknown"},
+  "sampling": {"version": "sha256-rank-v1", "seed": 42, "stratum_column": "tip_or_not", "strata": [0, 1], "caps": {"train": 4, "validation": 3, "test": 3}},
+  "provenance": {
+    "columns_and_units": {"status": "recovered", "source": "baseline-source; weather-07", "note": "TLC-style names, payment=1, USD, miles, minute duration and ratio target recovered; fixture column mapping is synthetic."},
+    "card_target": {"status": "recovered", "source": "weather-07", "note": "Card sample includes zero tips; baseline main sample uses positive tips. Demo supports both explicitly."},
+    "time_resolution": {"status": "demo_assumption", "source": "demo-policy-v1", "note": "Naive New York times; ambiguous/nonexistent times quarantined. No historical timezone guarantee."},
+    "economic_filters": {"status": "demo_assumption", "source": "demo-policy-v1", "note": "Positive finite fare, distance and duration; nonnegative finite tips; no default upper caps. Historical caps documented separately."},
+    "identity_and_duplicates": {"status": "demo_assumption", "source": "demo-policy-v1", "note": "File bytes plus original record ordinal identify rows; identical content retained and grouped."},
+    "zone_join": {"status": "demo_assumption", "source": "demo-policy-v1", "note": "Unique-key left joins with explicit match flags."},
+    "weather_join": {"status": "demo_assumption", "source": "demo-policy-v1", "note": "Synthetic station mapping and 60-minute tolerance; nearest descriptive observation, earlier tie."},
+    "match_retention": {"status": "demo_assumption", "source": "demo-policy-v1", "note": "Unmatched zones/weather retained by default."},
+    "split_and_sampling": {"status": "demo_assumption", "source": "demo-policy-v1", "note": "SHA256 grouping/ranking, seed 42, 70/15/15 bucket boundaries; not historical DuckDB hash reproduction. Caps apply per split and tip stratum."},
+    "learning_boundary": {"status": "recovered", "source": "weather-09; scripts/weather_effects_models.py", "note": "Training-only category fitting recovered; the preparation demo adds no learned transformations."}
+  }
+}

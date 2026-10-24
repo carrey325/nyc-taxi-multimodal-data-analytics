@@ -10,6 +10,8 @@ venv/
 .vscode/
 .DS_Store
 Thumbs.db
+.runs/
+.ipynb_checkpoints/
 
 # Large source/processed datasets are not distributed with this repository
 data/
