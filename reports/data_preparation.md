@@ -194,3 +194,17 @@ check, and this sample is not advertised as a drop-in weather-model input.
 
 The spatial panels and feature matrices remain separate prepared inputs.
 The Knicks event-tagging contract is likewise not rebuilt by this trip demo.
+
+## Verification record
+
+On 2026-10-24, the synthetic CLI, unit suite and notebook were executed using
+Python 3.13.7, pandas 3.0.2, NumPy 2.4.4 and PyArrow 23.0.1.
+Notebook tooling was nbconvert 7.16.6 and ipykernel 6.29.5; existing analysis
+dependency pins were retained. The executed notebook has compact outputs and
+was rendered to HTML for visual review. Generated runtime files remain ignored.
+
+On this Windows host, Jupyter needed local kernel socket access outside the
+execution sandbox, and a temporary clean Jupyter configuration avoided an
+unrelated global extension. This did not require external data access or
+changes to the user's global configuration. These are environment setup
+observations, not dependencies of the preparation functions.
